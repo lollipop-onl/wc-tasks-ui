@@ -591,6 +591,11 @@
 
   // src/components/onl-tasks.ts
   var OnlTasks = class extends s4 {
+    render() {
+      return $`
+      <p class="text-white">Hello, world.</p>
+    `;
+    }
   };
   OnlTasks = __decorateClass([
     n5("onl-tasks")
