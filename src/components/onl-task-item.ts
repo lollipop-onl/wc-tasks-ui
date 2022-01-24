@@ -41,7 +41,7 @@ export class OnlTaskItem extends LitElement {
 
     return html`
       <p>${this.task.title}</p>
-      ${this.task.note ? html`<p>${this.task.note}</p>` : null}
+      ${this.task.notes ? html`<p>${this.task.notes}</p>` : null}
       ${this.completed ? html`<p>(Done)</p>` : null}
       <button @click="${() => this.completeTask()}">Complete</button>
     `

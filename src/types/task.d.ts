@@ -3,7 +3,7 @@ export type TaskItem = {
   id: string;
   title: string;
   due: string;
-  note?: string;
+  notes?: string;
 }
 
 /** タスクセクション */
