@@ -659,6 +659,7 @@
             task: taskId
           })
         });
+        this.completedTasks.push(taskId);
       });
     }
     render() {
