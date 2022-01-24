@@ -638,6 +638,11 @@
   var n6;
   var e5 = ((n6 = window.HTMLSlotElement) === null || n6 === void 0 ? void 0 : n6.prototype.assignedElements) != null ? (o6, n7) => o6.assignedElements(n7) : (o6, n7) => o6.assignedNodes(n7).filter((o7) => o7.nodeType === Node.ELEMENT_NODE);
 
+  // src/utils/reload.ts
+  var reloadWindow = (serviceUrl) => {
+    window.open(serviceUrl, "_top");
+  };
+
   // src/components/onl-tasks.ts
   var OnlTasks = class extends s4 {
     constructor() {
@@ -676,7 +681,7 @@
     render() {
       return $`
       <pre>${"AmbientLightSensor" in window}</pre>
-      <button @click=${() => window.location.reload()}>Reload</button>
+      <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.illuminance != null ? $`
         <p>Illuminance: ${this.illuminance}lx</p>
       ` : null}
