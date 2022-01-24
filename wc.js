@@ -637,6 +637,7 @@
   var OnlTasks = class extends s4 {
     completeTask(tasklistId, taskId) {
       return __async(this, null, function* () {
+        console.log("requesting...");
         yield fetch(this.serviceUrl, {
           method: "POST",
           mode: "no-cors",
@@ -650,6 +651,7 @@
             task: taskId
           })
         });
+        console.log("request completed!");
       });
     }
     render() {
