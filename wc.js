@@ -732,6 +732,11 @@
     `;
     }
   };
+  OnlTaskItem.styles = r`
+    :host {
+      color: #ccc;
+    }
+  `;
   __decorateClass([
     e4({ type: String })
   ], OnlTaskItem.prototype, "serviceUrl", 2);
