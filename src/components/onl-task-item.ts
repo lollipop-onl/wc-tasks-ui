@@ -6,6 +6,7 @@ import type { TaskItem } from 'type:task'
 export class OnlTaskItem extends LitElement {
   static styles = css`
     :host {
+      font-family: 'Zen Kurenaido', sans-serif;
       color: #ccc;
     }
   `
