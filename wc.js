@@ -675,6 +675,7 @@
     }
     render() {
       return $`
+      <pre>${"AmbientLightSensor" in window}</pre>
       <button @click=${() => window.location.reload()}>Reload</button>
       ${this.illuminance != null ? $`
         <p>Illuminance: ${this.illuminance}lx</p>
