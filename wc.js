@@ -1,4 +1,5 @@
 (() => {
+  var __freeze = Object.freeze;
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __decorateClass = (decorators, target, key, kind) => {
@@ -10,6 +11,7 @@
       __defProp(target, key, result);
     return result;
   };
+  var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(raw || cooked.slice()) }));
 
   // node_modules/@lit/reactive-element/css-tag.js
   var t = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
@@ -590,11 +592,10 @@
   var e5 = ((n6 = window.HTMLSlotElement) === null || n6 === void 0 ? void 0 : n6.prototype.assignedElements) != null ? (o6, n7) => o6.assignedElements(n7) : (o6, n7) => o6.assignedNodes(n7).filter((o7) => o7.nodeType === Node.ELEMENT_NODE);
 
   // src/components/onl-tasks.ts
+  var _a;
   var OnlTasks = class extends s4 {
     render() {
-      return $`
-      <p class="text-white">Hello, world.</p>
-    `;
+      return $(_a || (_a = __template(['\n      <script src="https://cdn.tailwindcss.com"><\/script>\n      <p class="text-white">Hello, world.</p>\n    '])));
     }
   };
   OnlTasks = __decorateClass([
