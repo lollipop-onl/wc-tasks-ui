@@ -670,9 +670,9 @@
             ${items.map((task) => $`
                 <li>
                   <onl-task-item
-                    serviceUrl="${this.serviceUrl}"
-                    tasklistId="${tasklistId}"
-                    task="${task}"
+                    .serviceUrl="${this.serviceUrl}"
+                    .tasklistId="${tasklistId}"
+                    .task="${JSON.stringify(task)}"
                   ></onl-task-item>
                 </li>
               `)}
@@ -699,6 +699,54 @@
   OnlTasks = __decorateClass([
     n5("onl-tasks")
   ], OnlTasks);
+
+  // src/components/onl-task-item.ts
+  var OnlTaskItem = class extends s4 {
+    constructor() {
+      super(...arguments);
+      this.completed = false;
+    }
+    completeTask() {
+      return __async(this, null, function* () {
+        yield fetch(this.serviceUrl, {
+          method: "POST",
+          mode: "no-cors",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action: "complete_task",
+            tasklist: this.tasklistId,
+            task: this.task.id
+          })
+        });
+        this.completed = true;
+      });
+    }
+    render() {
+      return $`
+      <p>${this.task.title}</p>
+      ${this.completed && $`<p>(Done)</p>`}
+      <button @click="${() => this.completeTask()}">Complete</button>
+    `;
+    }
+  };
+  __decorateClass([
+    e4({ type: String })
+  ], OnlTaskItem.prototype, "serviceUrl", 2);
+  __decorateClass([
+    e4({ type: String })
+  ], OnlTaskItem.prototype, "tasklistId", 2);
+  __decorateClass([
+    e4({ type: Object })
+  ], OnlTaskItem.prototype, "task", 2);
+  __decorateClass([
+    t3()
+  ], OnlTaskItem.prototype, "completed", 2);
+  OnlTaskItem = __decorateClass([
+    n5("onl-task-item")
+  ], OnlTaskItem);
 })();
 /**
  * @license
