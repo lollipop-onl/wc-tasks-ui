@@ -711,7 +711,7 @@
         yield fetch(this.serviceUrl, {
           method: "POST",
           mode: "no-cors",
-          credentials: "same-origin",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json"
           },
@@ -728,7 +728,7 @@
       console.log(this.task);
       return $`
       <p>${this.task.title}</p>
-      ${this.completed && $`<p>(Done)</p>`}
+      ${this.completed ? $`<p>(Done)</p>` : null}
       <button @click="${() => this.completeTask()}">Complete</button>
     `;
     }
