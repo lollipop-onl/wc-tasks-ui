@@ -26,6 +26,8 @@ export class OnlTasks extends LitElement {
   @property({ type: Object }) tasks!: TaskItem[];
 
   private async completeTask(tasklistId: string, taskId: string) {
+    console.log('requesting...')
+
     await fetch(this.serviceUrl, {
       method: 'POST',
       mode: 'no-cors',
@@ -39,6 +41,8 @@ export class OnlTasks extends LitElement {
         task: taskId,
       })
     })
+
+    console.log('request completed!')
   }
 
   public render() {
