@@ -4,6 +4,12 @@ import type { TaskItem } from 'type:task'
 
 @customElement('onl-task-item')
 export class OnlTaskItem extends LitElement {
+  static styles = css`
+    :host {
+      color: #ccc;
+    }
+  `
+
   @property({ type: String }) serviceUrl!: string;
 
   @property({ type: String }) tasklistId!: string;
