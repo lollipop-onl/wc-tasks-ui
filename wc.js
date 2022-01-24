@@ -617,11 +617,19 @@
   var OnlTasks = class extends s4 {
     render() {
       return $`
-      ${this.tasks.map(({ title, items }) => $`
+      ${this.tasks.map(({ id: tasklistId, title, items }) => $`
           <h1>${title}</h1>
           <ul>
-            ${items.map(({ title: title2 }) => $`
-                <li>${title2}</li>
+            ${items.map(({ id: taskId, title: title2 }) => $`
+                <li>
+                  ${title2}
+                  <form action="${this.serviceUrl}" method="POST">
+                    <input type="hidden" name="action" value="completeTask" />
+                    <input type="hidden" name="tasklist" value="${tasklistId}" />
+                    <input type="hidden" name="task" value="${taskId}" />
+                    <button>Complete Task</button>
+                  </form>
+                </li>
               `)}
           </ul>
         `)}
