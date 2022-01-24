@@ -659,6 +659,9 @@
         };
         sensor.start();
       }
+      setInterval(() => {
+        reloadWindow(this.serviceUrl);
+      }, 5 * 60 * 1e3);
     }
     completeTask(tasklistId, taskId) {
       return __async(this, null, function* () {
