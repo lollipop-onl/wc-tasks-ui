@@ -22,7 +22,7 @@ export class OnlTaskItem extends LitElement {
     await fetch(this.serviceUrl, {
       method: 'POST',
       mode: 'no-cors',
-      credentials: 'same-origin',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -41,7 +41,7 @@ export class OnlTaskItem extends LitElement {
 
     return html`
       <p>${this.task.title}</p>
-      ${this.completed && html`<p>(Done)</p>`}
+      ${this.completed ? html`<p>(Done)</p>` : null}
       <button @click="${() => this.completeTask()}">Complete</button>
     `
   }
