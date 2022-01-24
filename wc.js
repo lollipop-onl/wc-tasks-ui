@@ -755,6 +755,7 @@
       console.log(this.task);
       return $`
       <p>${this.task.title}</p>
+      ${this.task.note ? $`<p>${this.task.note}</p>` : null}
       ${this.completed ? $`<p>(Done)</p>` : null}
       <button @click="${() => this.completeTask()}">Complete</button>
     `;
