@@ -57,7 +57,7 @@ export class OnlTasks extends LitElement {
                     <input type="hidden" name="task" value="${taskId}" />
                     <button>Complete Task</button>
                   </form>
-                  <button @click="${this.completeTask}">Complete Task (fetch)</button>
+                  <button @click="${() => this.completeTask(tasklistId, taskId)}">Complete Task (fetch)</button>
                 </li>
               `
             ))}
