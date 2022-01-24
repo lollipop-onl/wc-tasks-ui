@@ -763,6 +763,7 @@
   };
   OnlTaskItem.styles = r`
     :host {
+      font-family: 'Zen Kurenaido', sans-serif;
       color: #ccc;
     }
   `;
