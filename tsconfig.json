@@ -4,7 +4,13 @@
     "module": "ES2020",
     "lib": ["ESNext", "DOM"],
     "moduleResolution": "Node",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "component:*": ["src/components/*"],
+      "type:*": ["src/types/*"],
+    }
   },
-  "files": ["src/wc.ts"]
+  "files": ["src/wc.ts"],
+  "include": ["src/**/*.ts"]
 }

@@ -1,17 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-
-type SubTaskItem = {
-  id: string;
-  title: string;
-  due: string;
-}
-
-type TaskItem = {
-  id: string;
-  title: string;
-  items: SubTaskItem[];
-}
+import type { TaskSection } from 'type:task'
 
 @customElement('onl-tasks')
 export class OnlTasks extends LitElement {
@@ -23,7 +12,7 @@ export class OnlTasks extends LitElement {
 
   @property({ type: String }) serviceUrl!: string;
 
-  @property({ type: Object }) tasks!: TaskItem[];
+  @property({ type: Object }) tasks!: TaskSection[];
 
   @state() completedTasks: string[] = [];
 
@@ -51,18 +40,14 @@ export class OnlTasks extends LitElement {
         html`
           <h1>${title}</h1>
           <ul>
-            ${items.map(({ id: taskId, title }) => (
+            ${items.map((task) => (
               html`
                 <li>
-                  ${title}
-                  ${this.completedTasks.includes(taskId) ? '(Done)' : null}
-                  <form action="${this.serviceUrl}" method="POST">
-                    <input type="hidden" name="action" value="complete_task" />
-                    <input type="hidden" name="tasklist" value="${tasklistId}" />
-                    <input type="hidden" name="task" value="${taskId}" />
-                    <button>Complete Task</button>
-                  </form>
-                  <button @click="${() => this.completeTask(tasklistId, taskId)}">Complete Task (fetch)</button>
+                  <onl-task-item
+                    serviceUrl="${this.serviceUrl}"
+                    tasklistId="${tasklistId}"
+                    task="${task}"
+                  ></onl-task-item>
                 </li>
               `
             ))}
