@@ -16,7 +16,7 @@ type TaskItem = {
 @customElement('onl-tasks')
 export class OnlTasks extends LitElement {
   static styles = css`
-    p {
+    :host {
       color: white;
     }
   `;
