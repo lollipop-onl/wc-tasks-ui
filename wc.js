@@ -639,8 +639,11 @@
       return __async(this, null, function* () {
         yield fetch(this.serviceUrl, {
           method: "POST",
-          mode: "cors",
+          mode: "no-cors",
           credentials: "include",
+          headers: {
+            "Content-Type": "application/json"
+          },
           body: JSON.stringify({
             action: "complete_task",
             tasklist: tasklistId,
