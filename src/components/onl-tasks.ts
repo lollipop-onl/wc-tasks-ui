@@ -69,7 +69,7 @@ export class OnlTasks extends LitElement {
       ${this.tasks.map(({ id: tasklistId, title, items }) => (
         html`
           <h1>${title}</h1>
-          <ul>
+          <ol>
             ${items.map((task) => (
               html`
                 <li>
@@ -81,7 +81,7 @@ export class OnlTasks extends LitElement {
                 </li>
               `
             ))}
-          </ul>
+          </ol>
         `
       ))}
       <p>Hello, world.</p>
