@@ -1,0 +1,19 @@
+{
+  "name": "wc-tasks-ui",
+  "version": "1.0.0",
+  "main": "lib/wc.js",
+  "repository": "git@github.com:lollipop-onl/wc-tasks-ui.git",
+  "author": "lollipop-onl <lollipop@simochee.net>",
+  "license": "MIT",
+  "dependencies": {
+    "lit": "^2.1.1",
+    "typescript": "^4.5.5"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "esbuild": "^0.14.13"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}
