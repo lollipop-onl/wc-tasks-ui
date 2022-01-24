@@ -56,6 +56,7 @@ export class OnlTasks extends LitElement {
 
   public render() {
     return html`
+      <pre>${'AmbientLightSensor' in window}</pre>
       <button @click=${() => window.location.reload()}>Reload</button>
       ${this.illuminance != null ? html`
         <p>Illuminance: ${this.illuminance}lx</p>
