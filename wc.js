@@ -649,6 +649,9 @@
         sensor.onreading = () => {
           this.illuminance = sensor.illuminance;
         };
+        sensor.onerror = (event) => {
+          alert(`${event.error.name}: ${event.error.message}`);
+        };
         sensor.start();
       }
     }
@@ -672,6 +675,7 @@
     }
     render() {
       return $`
+      <button @click=${() => window.location.reload()}>Reload</button>
       ${this.illuminance != null ? $`
         <p>Illuminance: ${this.illuminance}lx</p>
       ` : null}
