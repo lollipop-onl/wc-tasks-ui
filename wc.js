@@ -667,17 +667,13 @@
       ${this.tasks.map(({ id: tasklistId, title, items }) => $`
           <h1>${title}</h1>
           <ul>
-            ${items.map(({ id: taskId, title: title2 }) => $`
+            ${items.map((task) => $`
                 <li>
-                  ${title2}
-                  ${this.completedTasks.includes(taskId) ? "(Done)" : null}
-                  <form action="${this.serviceUrl}" method="POST">
-                    <input type="hidden" name="action" value="complete_task" />
-                    <input type="hidden" name="tasklist" value="${tasklistId}" />
-                    <input type="hidden" name="task" value="${taskId}" />
-                    <button>Complete Task</button>
-                  </form>
-                  <button @click="${() => this.completeTask(tasklistId, taskId)}">Complete Task (fetch)</button>
+                  <onl-task-item
+                    serviceUrl="${this.serviceUrl}"
+                    tasklistId="${tasklistId}"
+                    task="${task}"
+                  ></onl-task-item>
                 </li>
               `)}
           </ul>
