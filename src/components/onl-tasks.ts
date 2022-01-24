@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { reloadWindow } from 'util:reload';
 import type { TaskSection } from 'type:task'
 
 @customElement('onl-tasks')
@@ -57,7 +58,7 @@ export class OnlTasks extends LitElement {
   public render() {
     return html`
       <pre>${'AmbientLightSensor' in window}</pre>
-      <button @click=${() => window.location.reload()}>Reload</button>
+      <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.illuminance != null ? html`
         <p>Illuminance: ${this.illuminance}lx</p>
       ` : null}
