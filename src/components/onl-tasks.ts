@@ -20,6 +20,10 @@ export class OnlTasks extends LitElement {
         this.illuminance = sensor.illuminance;
       };
 
+      sensor.onerror = (event) => {
+        alert(`${event.error.name}: ${event.error.message}`);
+      };
+
       sensor.start();
     }
   }
@@ -52,6 +56,7 @@ export class OnlTasks extends LitElement {
 
   public render() {
     return html`
+      <button @click=${() => window.location.reload()}>Reload</button>
       ${this.illuminance != null ? html`
         <p>Illuminance: ${this.illuminance}lx</p>
       ` : null}
