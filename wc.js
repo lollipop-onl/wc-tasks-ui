@@ -744,7 +744,7 @@
     e4({ type: String })
   ], OnlTaskItem.prototype, "tasklistId", 2);
   __decorateClass([
-    e4({ type: Object })
+    e4({ type: Object, converter: (value) => value != null && JSON.parse(value) })
   ], OnlTaskItem.prototype, "task", 2);
   __decorateClass([
     t3()
