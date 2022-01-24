@@ -670,9 +670,9 @@
             ${items.map((task) => $`
                 <li>
                   <onl-task-item
-                    .serviceUrl="${this.serviceUrl}"
-                    .tasklistId="${tasklistId}"
-                    .task=${JSON.stringify(task)}
+                    .serviceUrl=${this.serviceUrl}
+                    .tasklistId=${tasklistId}
+                    .task=${task}
                   ></onl-task-item>
                 </li>
               `)}
@@ -725,6 +725,7 @@
       });
     }
     render() {
+      console.log(this.task);
       return $`
       <p>${this.task.title}</p>
       ${this.completed && $`<p>(Done)</p>`}
@@ -744,7 +745,7 @@
     e4({ type: String })
   ], OnlTaskItem.prototype, "tasklistId", 2);
   __decorateClass([
-    e4({ type: Object, converter: (value) => value != null && JSON.parse(value) })
+    e4({ type: Object })
   ], OnlTaskItem.prototype, "task", 2);
   __decorateClass([
     t3()
