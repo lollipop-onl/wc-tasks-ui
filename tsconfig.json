@@ -3,8 +3,7 @@
   "compilerOptions": {
     "module": "ES2020",
     "moduleResolution": "Node",
-    "experimentalDecorators": true,
-    "outDir": "lib"
+    "experimentalDecorators": true
   },
   "files": ["src/wc.ts"]
 }

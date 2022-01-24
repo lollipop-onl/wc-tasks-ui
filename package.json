@@ -14,6 +14,7 @@
     "esbuild": "^0.14.13"
   },
   "scripts": {
-    "build": "tsc"
+    "prebuild": "tsc --noEmit",
+    "build": "esbuild src/wc.ts --bundle --outdir=lib"
   }
 }
