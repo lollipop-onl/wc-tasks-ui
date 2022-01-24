@@ -27,6 +27,10 @@ export class OnlTasks extends LitElement {
 
       sensor.start();
     }
+
+    setInterval(() => {
+      reloadWindow(this.serviceUrl);
+    }, 5 * 60 * 1000);
   }
 
   @property({ type: String }) serviceUrl!: string;
