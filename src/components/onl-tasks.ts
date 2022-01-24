@@ -25,7 +25,20 @@ export class OnlTasks extends LitElement {
 
   @property({ type: Object }) tasks!: TaskItem[];
 
-  render() {
+  private async completeTask(tasklistId: string, taskId: string) {
+    await fetch(this.serviceUrl, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      body: JSON.stringify({
+        action: 'complete_task',
+        tasklist: tasklistId,
+        task: taskId,
+      })
+    })
+  }
+
+  public render() {
     return html`
       ${this.tasks.map(({ id: tasklistId, title, items }) => (
         html`
@@ -36,11 +49,12 @@ export class OnlTasks extends LitElement {
                 <li>
                   ${title}
                   <form action="${this.serviceUrl}" method="POST">
-                    <input type="hidden" name="action" value="completeTask" />
+                    <input type="hidden" name="action" value="complete_task" />
                     <input type="hidden" name="tasklist" value="${tasklistId}" />
                     <input type="hidden" name="task" value="${taskId}" />
                     <button>Complete Task</button>
                   </form>
+                  <button onclick="${this.completeTask}">Complete Task (fetch)</button>
                 </li>
               `
             ))}
