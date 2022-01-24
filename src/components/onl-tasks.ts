@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 type SubTaskItem = {
   id: string;
@@ -25,9 +25,9 @@ export class OnlTasks extends LitElement {
 
   @property({ type: Object }) tasks!: TaskItem[];
 
-  private async completeTask(tasklistId: string, taskId: string) {
-    console.log('requesting...')
+  @state() completedTasks: string[] = [];
 
+  private async completeTask(tasklistId: string, taskId: string) {
     await fetch(this.serviceUrl, {
       method: 'POST',
       mode: 'no-cors',
@@ -40,9 +40,7 @@ export class OnlTasks extends LitElement {
         tasklist: tasklistId,
         task: taskId,
       })
-    })
-
-    console.log('request completed!')
+    });
   }
 
   public render() {
@@ -55,6 +53,7 @@ export class OnlTasks extends LitElement {
               html`
                 <li>
                   ${title}
+                  ${this.completedTasks.includes(taskId) ? '(Done)' : null}
                   <form action="${this.serviceUrl}" method="POST">
                     <input type="hidden" name="action" value="complete_task" />
                     <input type="hidden" name="tasklist" value="${tasklistId}" />
