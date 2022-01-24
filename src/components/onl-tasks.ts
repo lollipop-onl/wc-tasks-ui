@@ -20,7 +20,7 @@ export class OnlTasks extends LitElement {
         this.illuminance = sensor.illuminance;
       };
 
-      sensor.onerror = (event) => {
+      sensor.onerror = (event: any) => {
         alert(`${event.error.name}: ${event.error.message}`);
       };
 
