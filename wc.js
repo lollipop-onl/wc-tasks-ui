@@ -672,7 +672,7 @@
                   <onl-task-item
                     .serviceUrl="${this.serviceUrl}"
                     .tasklistId="${tasklistId}"
-                    .task="${JSON.stringify(task)}"
+                    .task=${JSON.stringify(task)}
                   ></onl-task-item>
                 </li>
               `)}
