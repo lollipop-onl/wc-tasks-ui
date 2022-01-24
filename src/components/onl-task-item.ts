@@ -14,7 +14,7 @@ export class OnlTaskItem extends LitElement {
 
   @property({ type: String }) tasklistId!: string;
 
-  @property({ type: Object, converter: (value) => value != null && JSON.parse(value) }) task!: TaskItem;
+  @property({ type: Object }) task!: TaskItem;
 
   @state() completed = false;
 
@@ -37,6 +37,8 @@ export class OnlTaskItem extends LitElement {
   }
 
   public render() {
+    console.log(this.task);
+
     return html`
       <p>${this.task.title}</p>
       ${this.completed && html`<p>(Done)</p>`}
