@@ -641,8 +641,16 @@
   // src/components/onl-tasks.ts
   var OnlTasks = class extends s4 {
     constructor() {
-      super(...arguments);
+      super();
       this.completedTasks = [];
+      this.illuminance = null;
+      if ("AmbientLightSensor" in window) {
+        const sensor = new window.AmbientLightSensor();
+        sensor.onreading = () => {
+          this.illuminance = sensor.illuminance;
+        };
+        sensor.start();
+      }
     }
     completeTask(tasklistId, taskId) {
       return __async(this, null, function* () {
@@ -664,6 +672,9 @@
     }
     render() {
       return $`
+      ${this.illuminance != null ? $`
+        <p>Illuminance: ${this.illuminance}lx</p>
+      ` : null}
       ${this.tasks.map(({ id: tasklistId, title, items }) => $`
           <h1>${title}</h1>
           <ul>
@@ -696,6 +707,9 @@
   __decorateClass([
     t3()
   ], OnlTasks.prototype, "completedTasks", 2);
+  __decorateClass([
+    t3()
+  ], OnlTasks.prototype, "illuminance", 2);
   OnlTasks = __decorateClass([
     n5("onl-tasks")
   ], OnlTasks);
