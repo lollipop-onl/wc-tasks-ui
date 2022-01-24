@@ -1,5 +1,4 @@
 (() => {
-  var __freeze = Object.freeze;
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __decorateClass = (decorators, target, key, kind) => {
@@ -11,7 +10,6 @@
       __defProp(target, key, result);
     return result;
   };
-  var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(raw || cooked.slice()) }));
 
   // node_modules/@lit/reactive-element/css-tag.js
   var t = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
@@ -32,6 +30,16 @@
     }
   };
   var o = (t3) => new s(typeof t3 == "string" ? t3 : t3 + "", e);
+  var r = (t3, ...n7) => {
+    const o6 = t3.length === 1 ? t3[0] : n7.reduce((e6, n8, s5) => e6 + ((t4) => {
+      if (t4._$cssResult$ === true)
+        return t4.cssText;
+      if (typeof t4 == "number")
+        return t4;
+      throw Error("Value passed to 'css' function must be a 'css' function result: " + t4 + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
+    })(n8) + t3[s5 + 1], t3[0]);
+    return new s(o6, e);
+  };
   var i = (e6, n7) => {
     t ? e6.adoptedStyleSheets = n7.map((t3) => t3 instanceof CSSStyleSheet ? t3 : t3.styleSheet) : n7.forEach((t3) => {
       const n8 = document.createElement("style"), s5 = window.litNonce;
@@ -592,12 +600,18 @@
   var e5 = ((n6 = window.HTMLSlotElement) === null || n6 === void 0 ? void 0 : n6.prototype.assignedElements) != null ? (o6, n7) => o6.assignedElements(n7) : (o6, n7) => o6.assignedNodes(n7).filter((o7) => o7.nodeType === Node.ELEMENT_NODE);
 
   // src/components/onl-tasks.ts
-  var _a;
   var OnlTasks = class extends s4 {
     render() {
-      return $(_a || (_a = __template(['\n      <script src="https://cdn.tailwindcss.com"><\/script>\n      <p class="text-white">Hello, world.</p>\n    '])));
+      return $`
+      <p>Hello, world.</p>
+    `;
     }
   };
+  OnlTasks.styles = r`
+    p {
+      color: white;
+    }
+  `;
   OnlTasks = __decorateClass([
     n5("onl-tasks")
   ], OnlTasks);
