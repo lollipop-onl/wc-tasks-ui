@@ -14,7 +14,7 @@ export class OnlTaskItem extends LitElement {
 
   @property({ type: String }) tasklistId!: string;
 
-  @property({ type: Object }) task!: TaskItem;
+  @property({ type: Object, converter: (value) => value != null && JSON.parse(value) }) task!: TaskItem;
 
   @state() completed = false;
 
