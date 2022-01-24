@@ -44,9 +44,9 @@ export class OnlTasks extends LitElement {
               html`
                 <li>
                   <onl-task-item
-                    serviceUrl="${this.serviceUrl}"
-                    tasklistId="${tasklistId}"
-                    task="${task}"
+                    .serviceUrl="${this.serviceUrl}"
+                    .tasklistId="${tasklistId}"
+                    .task="${JSON.stringify(task)}"
                   ></onl-task-item>
                 </li>
               `
