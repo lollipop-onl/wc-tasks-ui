@@ -690,7 +690,7 @@
       ` : null}
       ${this.tasks.map(({ id: tasklistId, title, items }) => $`
           <h1>${title}</h1>
-          <ul>
+          <ol>
             ${items.map((task) => $`
                 <li>
                   <onl-task-item
@@ -700,7 +700,7 @@
                   ></onl-task-item>
                 </li>
               `)}
-          </ul>
+          </ol>
         `)}
       <p>Hello, world.</p>
     `;
