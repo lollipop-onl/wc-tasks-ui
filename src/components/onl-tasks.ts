@@ -10,11 +10,27 @@ export class OnlTasks extends LitElement {
     }
   `;
 
+  constructor() {
+    super();
+
+    if ('AmbientLightSensor' in window) {
+      const sensor = new (window as any).AmbientLightSensor();
+
+      sensor.onreading = () => {
+        this.illuminance = sensor.illuminance;
+      };
+
+      sensor.start();
+    }
+  }
+
   @property({ type: String }) serviceUrl!: string;
 
   @property({ type: Object }) tasks!: TaskSection[];
 
   @state() completedTasks: string[] = [];
+
+  @state() illuminance: number | null = null;
 
   private async completeTask(tasklistId: string, taskId: string) {
     await fetch(this.serviceUrl, {
@@ -36,6 +52,9 @@ export class OnlTasks extends LitElement {
 
   public render() {
     return html`
+      ${this.illuminance != null ? html`
+        <p>Illuminance: ${this.illuminance}lx</p>
+      ` : null}
       ${this.tasks.map(({ id: tasklistId, title, items }) => (
         html`
           <h1>${title}</h1>
