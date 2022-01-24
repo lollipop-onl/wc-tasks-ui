@@ -41,6 +41,8 @@ export class OnlTasks extends LitElement {
         task: taskId,
       })
     });
+
+    this.completedTasks.push(taskId);
   }
 
   public render() {
