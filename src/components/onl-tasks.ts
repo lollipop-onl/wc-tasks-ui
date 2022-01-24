@@ -1,12 +1,17 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 @customElement('onl-tasks')
 export class OnlTasks extends LitElement {
+  static styles = css`
+    p {
+      color: white;
+    }
+  `;
+
   render() {
     return html`
-      <script src="https://cdn.tailwindcss.com"></script>
-      <p class="text-white">Hello, world.</p>
+      <p>Hello, world.</p>
     `;
   }
 }
