@@ -630,7 +630,7 @@
     }
   };
   OnlTasks.styles = r`
-    p {
+    :host {
       color: white;
     }
   `;
