@@ -10,6 +10,26 @@
       __defProp(target, key, result);
     return result;
   };
+  var __async = (__this, __arguments, generator) => {
+    return new Promise((resolve, reject) => {
+      var fulfilled = (value) => {
+        try {
+          step(generator.next(value));
+        } catch (e6) {
+          reject(e6);
+        }
+      };
+      var rejected = (value) => {
+        try {
+          step(generator.throw(value));
+        } catch (e6) {
+          reject(e6);
+        }
+      };
+      var step = (x2) => x2.done ? resolve(x2.value) : Promise.resolve(x2.value).then(fulfilled, rejected);
+      step((generator = generator.apply(__this, __arguments)).next());
+    });
+  };
 
   // node_modules/@lit/reactive-element/css-tag.js
   var t = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
@@ -615,6 +635,20 @@
 
   // src/components/onl-tasks.ts
   var OnlTasks = class extends s4 {
+    completeTask(tasklistId, taskId) {
+      return __async(this, null, function* () {
+        yield fetch(this.serviceUrl, {
+          method: "POST",
+          mode: "cors",
+          credentials: "include",
+          body: JSON.stringify({
+            action: "complete_task",
+            tasklist: tasklistId,
+            task: taskId
+          })
+        });
+      });
+    }
     render() {
       return $`
       ${this.tasks.map(({ id: tasklistId, title, items }) => $`
@@ -624,11 +658,12 @@
                 <li>
                   ${title2}
                   <form action="${this.serviceUrl}" method="POST">
-                    <input type="hidden" name="action" value="completeTask" />
+                    <input type="hidden" name="action" value="complete_task" />
                     <input type="hidden" name="tasklist" value="${tasklistId}" />
                     <input type="hidden" name="task" value="${taskId}" />
                     <button>Complete Task</button>
                   </form>
+                  <button onclick="${this.completeTask}">Complete Task (fetch)</button>
                 </li>
               `)}
           </ul>
