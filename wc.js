@@ -666,7 +666,7 @@
                     <input type="hidden" name="task" value="${taskId}" />
                     <button>Complete Task</button>
                   </form>
-                  <button onclick="${this.completeTask}">Complete Task (fetch)</button>
+                  <button @click="${this.completeTask}">Complete Task (fetch)</button>
                 </li>
               `)}
           </ul>
