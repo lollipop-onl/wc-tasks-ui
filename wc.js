@@ -743,27 +743,13 @@
   // src/components/onl-tasks.ts
   var OnlTasks = class extends s4 {
     constructor() {
-      super();
+      super(...arguments);
       this.completedTasks = [];
-      this.illuminance = null;
-      if ("AmbientLightSensor" in window) {
-        const sensor = new window.AmbientLightSensor();
-        sensor.onreading = () => {
-          this.illuminance = sensor.illuminance;
-        };
-        sensor.onerror = (event) => {
-          alert(`${event.error.name}: ${event.error.message}`);
-        };
-        sensor.start();
-      }
     }
     render() {
       return $`
       <onl-reload-timer .serviceUrl=${this.serviceUrl}></onl-reload-timer>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
-      ${this.illuminance != null ? $`
-        <p>Illuminance: ${this.illuminance}lx</p>
-      ` : null}
       ${this.tasks.map((tasklist) => $`
           <onl-tasklist-item
             .serviceUrl=${this.serviceUrl}
@@ -790,9 +776,6 @@
   __decorateClass([
     t3()
   ], OnlTasks.prototype, "completedTasks", 2);
-  __decorateClass([
-    t3()
-  ], OnlTasks.prototype, "illuminance", 2);
   OnlTasks = __decorateClass([
     n5("onl-tasks")
   ], OnlTasks);
@@ -854,8 +837,66 @@
     n5("onl-task-item")
   ], OnlTaskItem);
 
+  // node_modules/lockr/dist/lockr.esm.js
+  var PREFIX = "";
+  function getPrefixedKey(key, options) {
+    if ((options == null ? void 0 : options.noPrefix) === true) {
+      return key;
+    } else {
+      return "" + PREFIX + key;
+    }
+  }
+  function set(key, value, options) {
+    var query_key = getPrefixedKey(key, options);
+    try {
+      localStorage.setItem(query_key, JSON.stringify({
+        data: value
+      }));
+    } catch (e6) {
+      if (console) {
+        console.warn(`Lockr didn't successfully save the '{"` + key + '": "' + value + `"}' pair, because the localStorage is full.`);
+      }
+    }
+  }
+  function get(key, missing, options) {
+    var queryKey = getPrefixedKey(key, options);
+    var value;
+    var localValue = localStorage.getItem(queryKey);
+    try {
+      if (localValue !== null) {
+        value = JSON.parse(localValue);
+      }
+    } catch (e6) {
+      if (localStorage[queryKey]) {
+        value = {
+          data: localStorage.getItem(queryKey)
+        };
+      } else {
+        value = null;
+      }
+    }
+    if (!value) {
+      return missing;
+    } else if (typeof value === "object" && typeof value.data !== "undefined") {
+      return value.data;
+    }
+  }
+
   // src/components/onl-tasklist-item.ts
   var OnlTasklistItem = class extends s4 {
+    constructor() {
+      super();
+      this.isOpened = false;
+      this.isOpened = get(this.lockrKey, false);
+    }
+    get lockrKey() {
+      return `isopen_tasklist_${this.tasklist.id}`;
+    }
+    onToggle(e6) {
+      if (e6.target instanceof HTMLDetailsElement) {
+        set(this.lockrKey, e6.target.open);
+      }
+    }
     render() {
       if (this.tasklist.items.length === 0) {
         return $`
@@ -866,7 +907,7 @@
       `;
       }
       return $`
-      <details>
+      <details .open=${this.isOpened} @toggle=${this.onToggle}>
         <summary>
           <div class="summary">
             <div class="title">${this.tasklist.title}</div>
@@ -912,6 +953,7 @@
       .summary > .count {
         flex-shrink: 0;
         min-width: 3em;
+        box-sizing: border-box;
         padding: 4px 8px;
         margin-left: 16px;
         color: #ccc;
@@ -936,6 +978,9 @@
   __decorateClass([
     e4({ type: Object })
   ], OnlTasklistItem.prototype, "tasklist", 2);
+  __decorateClass([
+    t3()
+  ], OnlTasklistItem.prototype, "isOpened", 2);
   OnlTasklistItem = __decorateClass([
     n5("onl-tasklist-item")
   ], OnlTasklistItem);
