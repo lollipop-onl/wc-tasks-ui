@@ -8,14 +8,11 @@ export class OnlTasklistItem extends LitElement {
   static styles = [
     baseCss,
     css`
-      summary::marker {
-        display: none;
-      }
-
       .summary {
         display: flex;
         align-items: center;
         padding: 8px 16px;
+        list-style: none;
       }
 
       .summary > .title {
@@ -46,6 +43,15 @@ export class OnlTasklistItem extends LitElement {
   @property({ type: Object }) tasklist!: TaskSection;
 
   render() {
+    if (this.tasklist.items.length === 0) {
+      return html`
+        <div class="summary">
+          <div class="title">${this.tasklist.title}</div>
+          <div class="count">${this.tasklist.items.length}</div>
+        </div>
+      `
+    }
+
     return html`
       <details>
         <summary>
