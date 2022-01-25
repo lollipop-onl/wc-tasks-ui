@@ -884,11 +884,6 @@
 
   // src/components/onl-tasklist-item.ts
   var OnlTasklistItem = class extends s4 {
-    constructor() {
-      super();
-      this.isOpened = false;
-      this.isOpened = get(this.getLockrKey(), false);
-    }
     getLockrKey() {
       return `isopen_tasklist_${this.tasklist.id}`;
     }
@@ -907,7 +902,7 @@
       `;
       }
       return $`
-      <details .open=${this.isOpened} @toggle=${this.onToggle}>
+      <details .open=${get(this.getLockrKey(), false)} @toggle=${this.onToggle}>
         <summary>
           <div class="summary">
             <div class="title">${this.tasklist.title}</div>
@@ -978,9 +973,6 @@
   __decorateClass([
     e4({ type: Object })
   ], OnlTasklistItem.prototype, "tasklist", 2);
-  __decorateClass([
-    t3()
-  ], OnlTasklistItem.prototype, "isOpened", 2);
   OnlTasklistItem = __decorateClass([
     n5("onl-tasklist-item")
   ], OnlTasklistItem);
