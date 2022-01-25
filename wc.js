@@ -805,20 +805,25 @@
       });
     }
     render() {
+      const { title = "(\u30BF\u30A4\u30C8\u30EB\u306A\u3057)", due, notes } = this.task;
       return $`
       <div
         class="taskItem"
         aria-hidden="${this.completed}"
       >
         <div class="container">
-          <div class="title">${this.task.title}</div>
-          <div class="details">
-            ${this.task.due ? $`<div class="due">${this.task.due}</div>` : null}
-            ${this.task.notes ? $`<div class="notes">${this.task.notes}</div>` : null}
+          <div class="task">
+            <div class="title">${title}</div>
+            <div class="details">
+              ${due ? $`<div class="due">${due}</div>` : null}
+              ${notes ? $`<div class="notes">${notes}</div>` : null}
+            </div>
+          </div>
+          <div class="control">
+            <button @click="${() => this.completeTask()}">DONE</button>
           </div>
         </div>
       </div>
-      <button @click="${() => this.completeTask()}">Complete</button>
     `;
     }
   };
@@ -837,9 +842,17 @@
       }
 
       .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         padding: 16px 8px;
         color: #ccc;
         border-top: 1px solid #333;
+      }
+
+      .control {
+        flex-shrink: 0;
+        margin-left: 16px;
       }
 
       .details {
