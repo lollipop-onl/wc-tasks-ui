@@ -688,6 +688,15 @@
   OnlHeader.styles = [
     baseCss,
     r`
+      @keyframes progress {
+        0% {
+          transform: scale3d(1, 0, 1);
+        }
+        100% {
+          transform: scale3d(1, 1, 1);
+        }
+      }
+
       .header {
         position: sticky;
         top: 0;
@@ -695,7 +704,17 @@
         width: 100%;
         height: 64px;
         background: black;
-        border-bottom: 2px solid red;
+      }
+
+      .header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: red;
+        animation: progress 300s;
       }
     `
   ];
@@ -748,7 +767,7 @@
     }
     render() {
       return $`
-      <onl-header />
+      <onl-header></onl-header>
       <pre>${"AmbientLightSensor" in window}</pre>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.illuminance != null ? $`
@@ -784,7 +803,7 @@
     e4({ type: String })
   ], OnlTasks.prototype, "serviceUrl", 2);
   __decorateClass([
-    e4({ type: Object })
+    e4({ type: Array })
   ], OnlTasks.prototype, "tasks", 2);
   __decorateClass([
     t3()
