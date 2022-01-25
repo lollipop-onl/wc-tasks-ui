@@ -881,7 +881,7 @@
   OnlTasklistItem.styles = [
     baseCss,
     r`
-      summary::-webkit-details-marker {
+      summary::marker {
         display: none;
       }
 
