@@ -818,9 +818,6 @@
           </div>
         </div>
       </div>
-      <p>${this.task.title}</p>
-      ${this.task.notes ? $`<p>${this.task.notes}</p>` : null}
-      ${this.completed ? $`<p>(Done)</p>` : null}
       <button @click="${() => this.completeTask()}">Complete</button>
     `;
     }
@@ -830,6 +827,7 @@
     r`
       .taskItem {
         max-height: 100vh;
+        overflow: hidden;
         transition: max-height 0.5s ease, opacity 0.5s ease;
       }
 
