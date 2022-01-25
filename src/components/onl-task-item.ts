@@ -10,6 +10,7 @@ export class OnlTaskItem extends LitElement {
     css`
       .taskItem {
         max-height: 100vh;
+        overflow: hidden;
         transition: max-height 0.5s ease, opacity 0.5s ease;
       }
 
@@ -76,9 +77,6 @@ export class OnlTaskItem extends LitElement {
           </div>
         </div>
       </div>
-      <p>${this.task.title}</p>
-      ${this.task.notes ? html`<p>${this.task.notes}</p>` : null}
-      ${this.completed ? html`<p>(Done)</p>` : null}
       <button @click="${() => this.completeTask()}">Complete</button>
     `;
   }
