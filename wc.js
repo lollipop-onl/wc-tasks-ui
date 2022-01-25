@@ -889,11 +889,16 @@
   OnlTasklistItem.styles = [
     baseCss,
     r`
+      summary {
+        display: block;
+        list-style: none;
+      }
+
       .summary {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         padding: 8px 16px;
-        list-style: none;
       }
 
       .summary > .title {
