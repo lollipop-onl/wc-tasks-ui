@@ -23,9 +23,6 @@ export class OnlTasks extends LitElement {
 
   public render() {
     return html`
-      <onl-reload-timer
-        .serviceUrl=${this.serviceUrl}
-      ></onl-reload-timer>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.tasks.map((tasklist) => (
         html`
