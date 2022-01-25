@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { dayjs } from 'util:dayjs';
+import { dayjs, utc2date } from 'util:dayjs';
 import { baseCss } from "style:base.css";
 import type { TaskItem } from "type:task";
 
@@ -84,7 +84,7 @@ export class OnlTaskItem extends LitElement {
           <div class="task">
             <div class="title">${title}</div>
             <div class="details">
-              ${ due ? html`<div class="due">${dayjs().to(dayjs(due))}</div>` : null}
+              ${ due ? html`<div class="due">${dayjs().to(utc2date(due).endOf('date'))}</div>` : null}
               ${ notes ? html`<div class="notes">${notes}</div>` : null }
             </div>
           </div>

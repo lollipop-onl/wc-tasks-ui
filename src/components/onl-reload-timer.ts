@@ -53,7 +53,7 @@ export class OnlReloadTimer extends LitElement {
     super.connectedCallback();
 
     setTimeout(() => {
-      console.log('fired reload timer!');
+      console.log('fired reload timer!', this.serviceUrl);
 
       reloadWindow(this.serviceUrl);
     }, RELOAD_INTERVAL_MINUTES * 60 * 1000);
