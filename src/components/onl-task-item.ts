@@ -62,7 +62,7 @@ export class OnlTaskItem extends LitElement {
     return html`
       <div
         class="taskItem"
-        .ariaHidden=${this.completed.toString()}
+        aria-hidden="${this.completed}"
       >
         <div class="title">${this.task.title}</div>
         <div class="details">
