@@ -60,7 +60,7 @@ export class OnlTaskItem extends LitElement {
 
   public render() {
     return html`
-      <div .class=${['taskItem', this.completed ? '-done' : null]}>
+      <div .class=${`taskItem ${this.completed ? '-done' : null}`}>
         <div class="title">${this.task.title}</div>
         <div class="details">
           <div class="due">${this.task.due}</div>
