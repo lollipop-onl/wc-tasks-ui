@@ -893,6 +893,9 @@
     `;
     }
   };
+  OnlTasklistItem.styles = [
+    baseCss
+  ];
   __decorateClass([
     e4({ type: String })
   ], OnlTasklistItem.prototype, "serviceUrl", 2);
