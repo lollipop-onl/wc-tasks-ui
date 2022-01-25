@@ -1,6 +1,25 @@
 (() => {
+  var __create = Object.create;
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+  var __reExport = (target, module, copyDefault, desc) => {
+    if (module && typeof module === "object" || typeof module === "function") {
+      for (let key of __getOwnPropNames(module))
+        if (!__hasOwnProp.call(target, key) && (copyDefault || key !== "default"))
+          __defProp(target, key, { get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable });
+    }
+    return target;
+  };
+  var __toESM = (module, isNodeMode) => {
+    return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", !isNodeMode && module && module.__esModule ? { get: () => module.default, enumerable: true } : { value: module, enumerable: true })), module);
+  };
   var __decorateClass = (decorators, target, key, kind) => {
     var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
     for (var i4 = decorators.length - 1, decorator; i4 >= 0; i4--)
@@ -30,6 +49,258 @@
       step((generator = generator.apply(__this, __arguments)).next());
     });
   };
+
+  // node_modules/dayjs/dayjs.min.js
+  var require_dayjs_min = __commonJS({
+    "node_modules/dayjs/dayjs.min.js"(exports, module) {
+      !function(t4, e6) {
+        typeof exports == "object" && typeof module != "undefined" ? module.exports = e6() : typeof define == "function" && define.amd ? define(e6) : (t4 = typeof globalThis != "undefined" ? globalThis : t4 || self).dayjs = e6();
+      }(exports, function() {
+        "use strict";
+        var t4 = 1e3, e6 = 6e4, n7 = 36e5, r4 = "millisecond", i4 = "second", s5 = "minute", u2 = "hour", a3 = "day", o6 = "week", f2 = "month", h3 = "quarter", c2 = "year", d2 = "date", $2 = "Invalid Date", l5 = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y2 = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M2 = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_") }, m2 = function(t5, e7, n8) {
+          var r5 = String(t5);
+          return !r5 || r5.length >= e7 ? t5 : "" + Array(e7 + 1 - r5.length).join(n8) + t5;
+        }, g2 = { s: m2, z: function(t5) {
+          var e7 = -t5.utcOffset(), n8 = Math.abs(e7), r5 = Math.floor(n8 / 60), i5 = n8 % 60;
+          return (e7 <= 0 ? "+" : "-") + m2(r5, 2, "0") + ":" + m2(i5, 2, "0");
+        }, m: function t5(e7, n8) {
+          if (e7.date() < n8.date())
+            return -t5(n8, e7);
+          var r5 = 12 * (n8.year() - e7.year()) + (n8.month() - e7.month()), i5 = e7.clone().add(r5, f2), s6 = n8 - i5 < 0, u3 = e7.clone().add(r5 + (s6 ? -1 : 1), f2);
+          return +(-(r5 + (n8 - i5) / (s6 ? i5 - u3 : u3 - i5)) || 0);
+        }, a: function(t5) {
+          return t5 < 0 ? Math.ceil(t5) || 0 : Math.floor(t5);
+        }, p: function(t5) {
+          return { M: f2, y: c2, w: o6, d: a3, D: d2, h: u2, m: s5, s: i4, ms: r4, Q: h3 }[t5] || String(t5 || "").toLowerCase().replace(/s$/, "");
+        }, u: function(t5) {
+          return t5 === void 0;
+        } }, D = "en", v2 = {};
+        v2[D] = M2;
+        var p2 = function(t5) {
+          return t5 instanceof _2;
+        }, S3 = function(t5, e7, n8) {
+          var r5;
+          if (!t5)
+            return D;
+          if (typeof t5 == "string")
+            v2[t5] && (r5 = t5), e7 && (v2[t5] = e7, r5 = t5);
+          else {
+            var i5 = t5.name;
+            v2[i5] = t5, r5 = i5;
+          }
+          return !n8 && r5 && (D = r5), r5 || !n8 && D;
+        }, w2 = function(t5, e7) {
+          if (p2(t5))
+            return t5.clone();
+          var n8 = typeof e7 == "object" ? e7 : {};
+          return n8.date = t5, n8.args = arguments, new _2(n8);
+        }, O = g2;
+        O.l = S3, O.i = p2, O.w = function(t5, e7) {
+          return w2(t5, { locale: e7.$L, utc: e7.$u, x: e7.$x, $offset: e7.$offset });
+        };
+        var _2 = function() {
+          function M3(t5) {
+            this.$L = S3(t5.locale, null, true), this.parse(t5);
+          }
+          var m3 = M3.prototype;
+          return m3.parse = function(t5) {
+            this.$d = function(t6) {
+              var e7 = t6.date, n8 = t6.utc;
+              if (e7 === null)
+                return new Date(NaN);
+              if (O.u(e7))
+                return new Date();
+              if (e7 instanceof Date)
+                return new Date(e7);
+              if (typeof e7 == "string" && !/Z$/i.test(e7)) {
+                var r5 = e7.match(l5);
+                if (r5) {
+                  var i5 = r5[2] - 1 || 0, s6 = (r5[7] || "0").substring(0, 3);
+                  return n8 ? new Date(Date.UTC(r5[1], i5, r5[3] || 1, r5[4] || 0, r5[5] || 0, r5[6] || 0, s6)) : new Date(r5[1], i5, r5[3] || 1, r5[4] || 0, r5[5] || 0, r5[6] || 0, s6);
+                }
+              }
+              return new Date(e7);
+            }(t5), this.$x = t5.x || {}, this.init();
+          }, m3.init = function() {
+            var t5 = this.$d;
+            this.$y = t5.getFullYear(), this.$M = t5.getMonth(), this.$D = t5.getDate(), this.$W = t5.getDay(), this.$H = t5.getHours(), this.$m = t5.getMinutes(), this.$s = t5.getSeconds(), this.$ms = t5.getMilliseconds();
+          }, m3.$utils = function() {
+            return O;
+          }, m3.isValid = function() {
+            return !(this.$d.toString() === $2);
+          }, m3.isSame = function(t5, e7) {
+            var n8 = w2(t5);
+            return this.startOf(e7) <= n8 && n8 <= this.endOf(e7);
+          }, m3.isAfter = function(t5, e7) {
+            return w2(t5) < this.startOf(e7);
+          }, m3.isBefore = function(t5, e7) {
+            return this.endOf(e7) < w2(t5);
+          }, m3.$g = function(t5, e7, n8) {
+            return O.u(t5) ? this[e7] : this.set(n8, t5);
+          }, m3.unix = function() {
+            return Math.floor(this.valueOf() / 1e3);
+          }, m3.valueOf = function() {
+            return this.$d.getTime();
+          }, m3.startOf = function(t5, e7) {
+            var n8 = this, r5 = !!O.u(e7) || e7, h4 = O.p(t5), $3 = function(t6, e8) {
+              var i5 = O.w(n8.$u ? Date.UTC(n8.$y, e8, t6) : new Date(n8.$y, e8, t6), n8);
+              return r5 ? i5 : i5.endOf(a3);
+            }, l6 = function(t6, e8) {
+              return O.w(n8.toDate()[t6].apply(n8.toDate("s"), (r5 ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e8)), n8);
+            }, y3 = this.$W, M4 = this.$M, m4 = this.$D, g3 = "set" + (this.$u ? "UTC" : "");
+            switch (h4) {
+              case c2:
+                return r5 ? $3(1, 0) : $3(31, 11);
+              case f2:
+                return r5 ? $3(1, M4) : $3(0, M4 + 1);
+              case o6:
+                var D2 = this.$locale().weekStart || 0, v3 = (y3 < D2 ? y3 + 7 : y3) - D2;
+                return $3(r5 ? m4 - v3 : m4 + (6 - v3), M4);
+              case a3:
+              case d2:
+                return l6(g3 + "Hours", 0);
+              case u2:
+                return l6(g3 + "Minutes", 1);
+              case s5:
+                return l6(g3 + "Seconds", 2);
+              case i4:
+                return l6(g3 + "Milliseconds", 3);
+              default:
+                return this.clone();
+            }
+          }, m3.endOf = function(t5) {
+            return this.startOf(t5, false);
+          }, m3.$set = function(t5, e7) {
+            var n8, o7 = O.p(t5), h4 = "set" + (this.$u ? "UTC" : ""), $3 = (n8 = {}, n8[a3] = h4 + "Date", n8[d2] = h4 + "Date", n8[f2] = h4 + "Month", n8[c2] = h4 + "FullYear", n8[u2] = h4 + "Hours", n8[s5] = h4 + "Minutes", n8[i4] = h4 + "Seconds", n8[r4] = h4 + "Milliseconds", n8)[o7], l6 = o7 === a3 ? this.$D + (e7 - this.$W) : e7;
+            if (o7 === f2 || o7 === c2) {
+              var y3 = this.clone().set(d2, 1);
+              y3.$d[$3](l6), y3.init(), this.$d = y3.set(d2, Math.min(this.$D, y3.daysInMonth())).$d;
+            } else
+              $3 && this.$d[$3](l6);
+            return this.init(), this;
+          }, m3.set = function(t5, e7) {
+            return this.clone().$set(t5, e7);
+          }, m3.get = function(t5) {
+            return this[O.p(t5)]();
+          }, m3.add = function(r5, h4) {
+            var d3, $3 = this;
+            r5 = Number(r5);
+            var l6 = O.p(h4), y3 = function(t5) {
+              var e7 = w2($3);
+              return O.w(e7.date(e7.date() + Math.round(t5 * r5)), $3);
+            };
+            if (l6 === f2)
+              return this.set(f2, this.$M + r5);
+            if (l6 === c2)
+              return this.set(c2, this.$y + r5);
+            if (l6 === a3)
+              return y3(1);
+            if (l6 === o6)
+              return y3(7);
+            var M4 = (d3 = {}, d3[s5] = e6, d3[u2] = n7, d3[i4] = t4, d3)[l6] || 1, m4 = this.$d.getTime() + r5 * M4;
+            return O.w(m4, this);
+          }, m3.subtract = function(t5, e7) {
+            return this.add(-1 * t5, e7);
+          }, m3.format = function(t5) {
+            var e7 = this, n8 = this.$locale();
+            if (!this.isValid())
+              return n8.invalidDate || $2;
+            var r5 = t5 || "YYYY-MM-DDTHH:mm:ssZ", i5 = O.z(this), s6 = this.$H, u3 = this.$m, a4 = this.$M, o7 = n8.weekdays, f3 = n8.months, h4 = function(t6, n9, i6, s7) {
+              return t6 && (t6[n9] || t6(e7, r5)) || i6[n9].substr(0, s7);
+            }, c3 = function(t6) {
+              return O.s(s6 % 12 || 12, t6, "0");
+            }, d3 = n8.meridiem || function(t6, e8, n9) {
+              var r6 = t6 < 12 ? "AM" : "PM";
+              return n9 ? r6.toLowerCase() : r6;
+            }, l6 = { YY: String(this.$y).slice(-2), YYYY: this.$y, M: a4 + 1, MM: O.s(a4 + 1, 2, "0"), MMM: h4(n8.monthsShort, a4, f3, 3), MMMM: h4(f3, a4), D: this.$D, DD: O.s(this.$D, 2, "0"), d: String(this.$W), dd: h4(n8.weekdaysMin, this.$W, o7, 2), ddd: h4(n8.weekdaysShort, this.$W, o7, 3), dddd: o7[this.$W], H: String(s6), HH: O.s(s6, 2, "0"), h: c3(1), hh: c3(2), a: d3(s6, u3, true), A: d3(s6, u3, false), m: String(u3), mm: O.s(u3, 2, "0"), s: String(this.$s), ss: O.s(this.$s, 2, "0"), SSS: O.s(this.$ms, 3, "0"), Z: i5 };
+            return r5.replace(y2, function(t6, e8) {
+              return e8 || l6[t6] || i5.replace(":", "");
+            });
+          }, m3.utcOffset = function() {
+            return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
+          }, m3.diff = function(r5, d3, $3) {
+            var l6, y3 = O.p(d3), M4 = w2(r5), m4 = (M4.utcOffset() - this.utcOffset()) * e6, g3 = this - M4, D2 = O.m(this, M4);
+            return D2 = (l6 = {}, l6[c2] = D2 / 12, l6[f2] = D2, l6[h3] = D2 / 3, l6[o6] = (g3 - m4) / 6048e5, l6[a3] = (g3 - m4) / 864e5, l6[u2] = g3 / n7, l6[s5] = g3 / e6, l6[i4] = g3 / t4, l6)[y3] || g3, $3 ? D2 : O.a(D2);
+          }, m3.daysInMonth = function() {
+            return this.endOf(f2).$D;
+          }, m3.$locale = function() {
+            return v2[this.$L];
+          }, m3.locale = function(t5, e7) {
+            if (!t5)
+              return this.$L;
+            var n8 = this.clone(), r5 = S3(t5, e7, true);
+            return r5 && (n8.$L = r5), n8;
+          }, m3.clone = function() {
+            return O.w(this.$d, this);
+          }, m3.toDate = function() {
+            return new Date(this.valueOf());
+          }, m3.toJSON = function() {
+            return this.isValid() ? this.toISOString() : null;
+          }, m3.toISOString = function() {
+            return this.$d.toISOString();
+          }, m3.toString = function() {
+            return this.$d.toUTCString();
+          }, M3;
+        }(), b2 = _2.prototype;
+        return w2.prototype = b2, [["$ms", r4], ["$s", i4], ["$m", s5], ["$H", u2], ["$W", a3], ["$M", f2], ["$y", c2], ["$D", d2]].forEach(function(t5) {
+          b2[t5[1]] = function(e7) {
+            return this.$g(e7, t5[0], t5[1]);
+          };
+        }), w2.extend = function(t5, e7) {
+          return t5.$i || (t5(e7, _2, w2), t5.$i = true), w2;
+        }, w2.locale = S3, w2.isDayjs = p2, w2.unix = function(t5) {
+          return w2(1e3 * t5);
+        }, w2.en = v2[D], w2.Ls = v2, w2.p = {}, w2;
+      });
+    }
+  });
+
+  // node_modules/dayjs/plugin/relativeTime.js
+  var require_relativeTime = __commonJS({
+    "node_modules/dayjs/plugin/relativeTime.js"(exports, module) {
+      !function(r4, e6) {
+        typeof exports == "object" && typeof module != "undefined" ? module.exports = e6() : typeof define == "function" && define.amd ? define(e6) : (r4 = typeof globalThis != "undefined" ? globalThis : r4 || self).dayjs_plugin_relativeTime = e6();
+      }(exports, function() {
+        "use strict";
+        return function(r4, e6, t4) {
+          r4 = r4 || {};
+          var n7 = e6.prototype, o6 = { future: "in %s", past: "%s ago", s: "a few seconds", m: "a minute", mm: "%d minutes", h: "an hour", hh: "%d hours", d: "a day", dd: "%d days", M: "a month", MM: "%d months", y: "a year", yy: "%d years" };
+          function i4(r5, e7, t5, o7) {
+            return n7.fromToBase(r5, e7, t5, o7);
+          }
+          t4.en.relativeTime = o6, n7.fromToBase = function(e7, n8, i5, d3, u2) {
+            for (var f2, a3, s5, l5 = i5.$locale().relativeTime || o6, h3 = r4.thresholds || [{ l: "s", r: 44, d: "second" }, { l: "m", r: 89 }, { l: "mm", r: 44, d: "minute" }, { l: "h", r: 89 }, { l: "hh", r: 21, d: "hour" }, { l: "d", r: 35 }, { l: "dd", r: 25, d: "day" }, { l: "M", r: 45 }, { l: "MM", r: 10, d: "month" }, { l: "y", r: 17 }, { l: "yy", d: "year" }], m2 = h3.length, c2 = 0; c2 < m2; c2 += 1) {
+              var y2 = h3[c2];
+              y2.d && (f2 = d3 ? t4(e7).diff(i5, y2.d, true) : i5.diff(e7, y2.d, true));
+              var p2 = (r4.rounding || Math.round)(Math.abs(f2));
+              if (s5 = f2 > 0, p2 <= y2.r || !y2.r) {
+                p2 <= 1 && c2 > 0 && (y2 = h3[c2 - 1]);
+                var v2 = l5[y2.l];
+                u2 && (p2 = u2("" + p2)), a3 = typeof v2 == "string" ? v2.replace("%d", p2) : v2(p2, n8, y2.l, s5);
+                break;
+              }
+            }
+            if (n8)
+              return a3;
+            var M2 = s5 ? l5.future : l5.past;
+            return typeof M2 == "function" ? M2(a3) : M2.replace("%s", a3);
+          }, n7.to = function(r5, e7) {
+            return i4(r5, e7, this, true);
+          }, n7.from = function(r5, e7) {
+            return i4(r5, e7, this);
+          };
+          var d2 = function(r5) {
+            return r5.$u ? t4.utc() : t4();
+          };
+          n7.toNow = function(r5) {
+            return this.to(d2(this), r5);
+          }, n7.fromNow = function(r5) {
+            return this.from(d2(this), r5);
+          };
+        };
+      });
+    }
+  });
 
   // node_modules/@lit/reactive-element/css-tag.js
   var t = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
@@ -781,6 +1052,11 @@
     n5("onl-tasks")
   ], OnlTasks);
 
+  // src/utils/dayjs.ts
+  var import_dayjs = __toESM(require_dayjs_min());
+  var import_relativeTime = __toESM(require_relativeTime());
+  import_dayjs.default.extend(import_relativeTime.default);
+
   // src/components/onl-task-item.ts
   var OnlTaskItem = class extends s4 {
     constructor() {
@@ -816,7 +1092,7 @@
           <div class="task">
             <div class="title">${title}</div>
             <div class="details">
-              ${due ? $`<div class="due">${due}</div>` : null}
+              ${due ? $`<div class="due">${(0, import_dayjs.default)().to((0, import_dayjs.default)(due))}</div>` : null}
               ${notes ? $`<div class="notes">${notes}</div>` : null}
             </div>
           </div>
