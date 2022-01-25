@@ -2,7 +2,7 @@ import { css } from 'lit';
 
 export const baseCss = css`
   /* Minimal CSS Reset */
-  html {
+  :host {
     box-sizing: border-box;
     font-size: 16px;
   }
@@ -11,7 +11,7 @@ export const baseCss = css`
     box-sizing: inherit;
   }
 
-  body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  h1, h2, h3, h4, h5, h6, p, ol, ul {
     margin: 0;
     padding: 0;
     font-weight: normal;
@@ -26,6 +26,7 @@ export const baseCss = css`
     height: auto;
   }
 
+  /* Custom Reset CSS */
   :host {
     user-select: none;
   }
