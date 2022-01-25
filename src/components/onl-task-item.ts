@@ -9,15 +9,15 @@ export class OnlTaskItem extends LitElement {
     baseCss,
     css`
       .taskItem {
-        height: 100%;
+        max-height: 100vh;
         padding: 16px 8px;
         color: #ccc;
         border-top: 1px solid #333;
-        transition: height 0.5s ease;
+        transition: max-height 0.5s ease;
       }
 
       .taskItem.-done {
-        height: 0%;
+        max-height: 0;
       }
 
       .taskItem > .details {
@@ -60,7 +60,7 @@ export class OnlTaskItem extends LitElement {
 
   public render() {
     return html`
-      <div class="taskItem -done">
+      <div .class=${['taskItem', this.completed ? '-done' : null]}>
         <div class="title">${this.task.title}</div>
         <div class="details">
           <div class="due">${this.task.due}</div>
