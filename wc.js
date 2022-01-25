@@ -302,6 +302,91 @@
     }
   });
 
+  // node_modules/dayjs/plugin/utc.js
+  var require_utc = __commonJS({
+    "node_modules/dayjs/plugin/utc.js"(exports, module) {
+      !function(t4, i4) {
+        typeof exports == "object" && typeof module != "undefined" ? module.exports = i4() : typeof define == "function" && define.amd ? define(i4) : (t4 = typeof globalThis != "undefined" ? globalThis : t4 || self).dayjs_plugin_utc = i4();
+      }(exports, function() {
+        "use strict";
+        var t4 = "minute", i4 = /[+-]\d\d(?::?\d\d)?/g, e6 = /([+-]|\d\d)/g;
+        return function(s5, f2, n7) {
+          var u2 = f2.prototype;
+          n7.utc = function(t5) {
+            var i5 = { date: t5, utc: true, args: arguments };
+            return new f2(i5);
+          }, u2.utc = function(i5) {
+            var e7 = n7(this.toDate(), { locale: this.$L, utc: true });
+            return i5 ? e7.add(this.utcOffset(), t4) : e7;
+          }, u2.local = function() {
+            return n7(this.toDate(), { locale: this.$L, utc: false });
+          };
+          var o6 = u2.parse;
+          u2.parse = function(t5) {
+            t5.utc && (this.$u = true), this.$utils().u(t5.$offset) || (this.$offset = t5.$offset), o6.call(this, t5);
+          };
+          var r4 = u2.init;
+          u2.init = function() {
+            if (this.$u) {
+              var t5 = this.$d;
+              this.$y = t5.getUTCFullYear(), this.$M = t5.getUTCMonth(), this.$D = t5.getUTCDate(), this.$W = t5.getUTCDay(), this.$H = t5.getUTCHours(), this.$m = t5.getUTCMinutes(), this.$s = t5.getUTCSeconds(), this.$ms = t5.getUTCMilliseconds();
+            } else
+              r4.call(this);
+          };
+          var a3 = u2.utcOffset;
+          u2.utcOffset = function(s6, f3) {
+            var n8 = this.$utils().u;
+            if (n8(s6))
+              return this.$u ? 0 : n8(this.$offset) ? a3.call(this) : this.$offset;
+            if (typeof s6 == "string" && (s6 = function(t5) {
+              t5 === void 0 && (t5 = "");
+              var s7 = t5.match(i4);
+              if (!s7)
+                return null;
+              var f4 = ("" + s7[0]).match(e6) || ["-", 0, 0], n9 = f4[0], u4 = 60 * +f4[1] + +f4[2];
+              return u4 === 0 ? 0 : n9 === "+" ? u4 : -u4;
+            }(s6)) === null)
+              return this;
+            var u3 = Math.abs(s6) <= 16 ? 60 * s6 : s6, o7 = this;
+            if (f3)
+              return o7.$offset = u3, o7.$u = s6 === 0, o7;
+            if (s6 !== 0) {
+              var r5 = this.$u ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset();
+              (o7 = this.local().add(u3 + r5, t4)).$offset = u3, o7.$x.$localOffset = r5;
+            } else
+              o7 = this.utc();
+            return o7;
+          };
+          var h3 = u2.format;
+          u2.format = function(t5) {
+            var i5 = t5 || (this.$u ? "YYYY-MM-DDTHH:mm:ss[Z]" : "");
+            return h3.call(this, i5);
+          }, u2.valueOf = function() {
+            var t5 = this.$utils().u(this.$offset) ? 0 : this.$offset + (this.$x.$localOffset || new Date().getTimezoneOffset());
+            return this.$d.valueOf() - 6e4 * t5;
+          }, u2.isUTC = function() {
+            return !!this.$u;
+          }, u2.toISOString = function() {
+            return this.toDate().toISOString();
+          }, u2.toString = function() {
+            return this.toDate().toUTCString();
+          };
+          var l5 = u2.toDate;
+          u2.toDate = function(t5) {
+            return t5 === "s" && this.$offset ? n7(this.format("YYYY-MM-DD HH:mm:ss:SSS")).toDate() : l5.call(this);
+          };
+          var c2 = u2.diff;
+          u2.diff = function(t5, i5, e7) {
+            if (t5 && this.$u === t5.$u)
+              return c2.call(this, t5, i5, e7);
+            var s6 = this.local(), f3 = n7(t5).local();
+            return c2.call(s6, f3, i5, e7);
+          };
+        };
+      });
+    }
+  });
+
   // node_modules/@lit/reactive-element/css-tag.js
   var t = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
   var e = Symbol();
@@ -960,7 +1045,7 @@
     connectedCallback() {
       super.connectedCallback();
       setTimeout(() => {
-        console.log("fired reload timer!");
+        console.log("fired reload timer!", this.serviceUrl);
         reloadWindow(this.serviceUrl);
       }, RELOAD_INTERVAL_MINUTES * 60 * 1e3);
     }
@@ -1020,7 +1105,9 @@
     }
     render() {
       return $`
-      <onl-reload-timer .serviceUrl=${this.serviceUrl}></onl-reload-timer>
+      <onl-reload-timer
+        .serviceUrl=${this.serviceUrl}
+      ></onl-reload-timer>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.tasks.map((tasklist) => $`
           <onl-tasklist-item
@@ -1055,7 +1142,13 @@
   // src/utils/dayjs.ts
   var import_dayjs = __toESM(require_dayjs_min());
   var import_relativeTime = __toESM(require_relativeTime());
+  var import_utc = __toESM(require_utc());
   import_dayjs.default.extend(import_relativeTime.default);
+  import_dayjs.default.extend(import_utc.default);
+  var utc2date = (datetime) => {
+    const d2 = import_dayjs.default.utc(datetime);
+    return (0, import_dayjs.default)().year(d2.year()).month(d2.month()).date(d2.date()).endOf("date");
+  };
 
   // src/components/onl-task-item.ts
   var OnlTaskItem = class extends s4 {
@@ -1092,7 +1185,7 @@
           <div class="task">
             <div class="title">${title}</div>
             <div class="details">
-              ${due ? $`<div class="due">${(0, import_dayjs.default)().to((0, import_dayjs.default)(due))}</div>` : null}
+              ${due ? $`<div class="due">${(0, import_dayjs.default)().to(utc2date(due).endOf("date"))}</div>` : null}
               ${notes ? $`<div class="notes">${notes}</div>` : null}
             </div>
           </div>
