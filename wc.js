@@ -1251,12 +1251,14 @@
       }
       return $`
       <details
-        .open=${get(this.getLockrKey(), false)}
+        .open=${get(this.getLockrKey(), true)}
         @toggle=${this.onToggle}
       >
         <summary>
           <div class="summary">
             <div class="title">${this.tasklist.title}</div>
+            <div class="icon -opened">-</div>
+            <div class="icon -closed">+</div>
           </div>
         </summary>
         <div>
@@ -1296,17 +1298,14 @@
         text-overflow: ellipsis;
       }
 
-      .summary > .count {
-        flex-shrink: 0;
-        min-width: 3em;
-        box-sizing: border-box;
-        padding: 4px 8px;
-        margin-left: 16px;
-        color: #ccc;
-        line-height: 1;
-        text-align: center;
-        border: 1px solid #555;
-        border-radius: 4px;
+      .summary > .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border: 1px solid #333;
+        border-radius: 50%;
       }
 
       .summary.-empty {
@@ -1315,6 +1314,11 @@
 
       .summary.-empty > .title {
         font-weight: normal;
+      }
+
+      summary[open] .icon.-opened,
+      summary:not([open]) .icon.-closed {
+        display: none;
       }
     `
   ];
