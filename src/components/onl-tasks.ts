@@ -41,24 +41,6 @@ export class OnlTasks extends LitElement {
 
   @state() illuminance: number | null = null;
 
-  private async completeTask(tasklistId: string, taskId: string) {
-    await fetch(this.serviceUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        action: 'complete_task',
-        tasklist: tasklistId,
-        task: taskId,
-      })
-    });
-
-    this.completedTasks.push(taskId);
-  }
-
   public render() {
     return html`
       <onl-reload-timer .serviceUrl=${this.serviceUrl}></onl-reload-timer>
@@ -74,7 +56,6 @@ export class OnlTasks extends LitElement {
           ></onl-tasklist-item>
         `
       ))}
-      <p>Hello, world.</p>
     `;
   }
 }

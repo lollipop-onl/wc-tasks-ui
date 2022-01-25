@@ -41,8 +41,6 @@ export class OnlTaskItem extends LitElement {
   }
 
   public render() {
-    console.log(this.task);
-
     return html`
       <p>${this.task.title}</p>
       ${this.task.notes ? html`<p>${this.task.notes}</p>` : null}
