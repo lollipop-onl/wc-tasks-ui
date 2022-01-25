@@ -9,7 +9,8 @@
     "paths": {
       "component:*": ["src/components/*"],
       "type:*": ["src/types/*"],
-      "util:*": ["src/utils/*"]
+      "util:*": ["src/utils/*"],
+      "style:*": ["src/styles/*"],
     }
   },
   "files": ["src/wc.ts"],

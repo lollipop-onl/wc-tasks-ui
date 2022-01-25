@@ -2,14 +2,18 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { reloadWindow } from 'util:reload';
 import type { TaskSection } from 'type:task'
+import { baseCss } from 'style:base.css';
 
 @customElement('onl-tasks')
 export class OnlTasks extends LitElement {
-  static styles = css`
-    :host {
-      color: white;
-    }
-  `;
+  static styles = [
+    baseCss,
+    css`
+      :host {
+        color: #ccc;
+      }
+    `,
+  ];
 
   constructor() {
     super();

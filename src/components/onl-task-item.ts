@@ -1,15 +1,18 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property, state } from 'lit/decorators.js';
-import type { TaskItem } from 'type:task'
+import { customElement, property, state } from "lit/decorators.js";
+import { baseCss } from "style:base.css";
+import type { TaskItem } from "type:task";
 
-@customElement('onl-task-item')
+@customElement("onl-task-item")
 export class OnlTaskItem extends LitElement {
-  static styles = css`
-    :host {
-      font-family: 'Zen Kurenaido', sans-serif;
-      color: #ccc;
-    }
-  `
+  static styles = [
+    baseCss,
+    css`
+      :host {
+        color: #ccc;
+      }
+    `,
+  ];
 
   @property({ type: String }) serviceUrl!: string;
 
@@ -21,18 +24,18 @@ export class OnlTaskItem extends LitElement {
 
   private async completeTask(): Promise<void> {
     await fetch(this.serviceUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      credentials: 'include',
+      method: "POST",
+      mode: "no-cors",
+      credentials: "include",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        action: 'complete_task',
+        action: "complete_task",
         tasklist: this.tasklistId,
         task: this.task.id,
-      })
-    })
+      }),
+    });
 
     this.completed = true;
   }
@@ -45,6 +48,6 @@ export class OnlTaskItem extends LitElement {
       ${this.task.notes ? html`<p>${this.task.notes}</p>` : null}
       ${this.completed ? html`<p>(Done)</p>` : null}
       <button @click="${() => this.completeTask()}">Complete</button>
-    `
+    `;
   }
 }
