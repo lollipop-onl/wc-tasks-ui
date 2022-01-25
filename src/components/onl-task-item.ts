@@ -10,22 +10,26 @@ export class OnlTaskItem extends LitElement {
     css`
       .taskItem {
         max-height: 100vh;
-        padding: 16px 8px;
-        color: #ccc;
-        border-top: 1px solid #333;
-        transition: max-height 0.5s ease;
+        transition: max-height 0.5s ease, opacity 0.5s ease;
       }
 
       .taskItem[aria-hidden=true] {
         max-height: 0;
+        opacity: 0.4;
       }
 
-      .taskItem > .details {
+      .container {
+        padding: 16px 8px;
+        color: #ccc;
+        border-top: 1px solid #333;
+      }
+
+      .details {
         display: flex;
         align-items: center;
       }
 
-      .taskItem > .details > .notes {
+      .notes {
         font-size: 12px;
         color: #aaa;
       }
@@ -64,10 +68,12 @@ export class OnlTaskItem extends LitElement {
         class="taskItem"
         aria-hidden="${this.completed}"
       >
-        <div class="title">${this.task.title}</div>
-        <div class="details">
-          <div class="due">${this.task.due}</div>
-          ${ this.task.notes ? html`<div class="notes">${this.task.notes}</div>` : null }
+        <div class="container">
+          <div class="title">${this.task.title}</div>
+          <div class="details">
+            ${ this.task.due ? html`<div class="due">${this.task.due}</div>` : null}
+            ${ this.task.notes ? html`<div class="notes">${this.task.notes}</div>` : null }
+          </div>
         </div>
       </div>
       <p>${this.task.title}</p>
