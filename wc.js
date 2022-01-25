@@ -887,14 +887,14 @@
     constructor() {
       super();
       this.isOpened = false;
-      this.isOpened = get(this.lockrKey, false);
+      this.isOpened = get(this.getLockrKey(), false);
     }
-    get lockrKey() {
+    getLockrKey() {
       return `isopen_tasklist_${this.tasklist.id}`;
     }
     onToggle(e6) {
       if (e6.target instanceof HTMLDetailsElement) {
-        set(this.lockrKey, e6.target.open);
+        set(this.getLockrKey(), e6.target.open);
       }
     }
     render() {
