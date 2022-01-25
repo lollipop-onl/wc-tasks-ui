@@ -6,15 +6,6 @@ import { baseCss } from 'style:base.css';
 
 @customElement('onl-tasks')
 export class OnlTasks extends LitElement {
-  static styles = [
-    baseCss,
-    css`
-      :host {
-        color: #ccc;
-      }
-    `,
-  ];
-
   @property({ type: String }) serviceUrl!: string;
 
   @property({ type: Array }) tasks!: TaskSection[];

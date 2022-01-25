@@ -26,12 +26,17 @@ export const baseCss = css`
     height: auto;
   }
 
+  /* Custom Properties */
+  :host {
+    --font-primary: 'Kiwi Maru', serif;
+  }
+
   /* Custom Reset CSS */
   :host {
     user-select: none;
   }
 
   :host, button, input, textarea {
-    font-family: 'Zen Kurenaido', sans-serif;
+    font-family: var(--font-primary);
   }
 `
