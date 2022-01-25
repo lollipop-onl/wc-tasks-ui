@@ -778,24 +778,15 @@
     render() {
       return $`
       <onl-reload-timer .serviceUrl=${this.serviceUrl}></onl-reload-timer>
-      <pre>${"AmbientLightSensor" in window}</pre>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.illuminance != null ? $`
         <p>Illuminance: ${this.illuminance}lx</p>
       ` : null}
-      ${this.tasks.map(({ id: tasklistId, title, items }) => $`
-          <h1>${title}</h1>
-          <ol>
-            ${items.map((task) => $`
-                <li>
-                  <onl-task-item
-                    .serviceUrl=${this.serviceUrl}
-                    .tasklistId=${tasklistId}
-                    .task=${task}
-                  ></onl-task-item>
-                </li>
-              `)}
-          </ol>
+      ${this.tasks.map((tasklist) => $`
+          <onl-tasklist-item
+            .serviceUrl=${this.serviceUrl}
+            .tasklist=${tasklist}
+          ></onl-tasklist-item>
         `)}
       <p>Hello, world.</p>
     `;
@@ -882,6 +873,35 @@
   OnlTaskItem = __decorateClass([
     n5("onl-task-item")
   ], OnlTaskItem);
+
+  // src/components/onl-tasklist-item.ts
+  var OnlTasklistItem = class extends s4 {
+    render() {
+      return $`
+      <details>
+        <summary>${this.tasklist.title} (${this.tasklist.items.length})</summary>
+        <div>
+          ${this.tasklist.items.map((task) => $`
+              <onl-task-item
+                .serviceUrl=${this.serviceUrl}
+                .tasklistId=${this.tasklist.id}
+                .task=${task}
+              ></onl-task-item>
+            `)}
+        </div>
+      </details>
+    `;
+    }
+  };
+  __decorateClass([
+    e4({ type: String })
+  ], OnlTasklistItem.prototype, "serviceUrl", 2);
+  __decorateClass([
+    e4({ type: Object })
+  ], OnlTasklistItem.prototype, "tasklist", 2);
+  OnlTasklistItem = __decorateClass([
+    n5("onl-tasklist-item")
+  ], OnlTasklistItem);
 })();
 /**
  * @license
