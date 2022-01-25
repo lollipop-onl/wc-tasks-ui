@@ -8,7 +8,7 @@ export class OnlTasklistItem extends LitElement {
   static styles = [
     baseCss,
     css`
-      summary::-webkit-details-marker {
+      summary::marker {
         display: none;
       }
 
