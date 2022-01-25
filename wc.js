@@ -1076,12 +1076,15 @@
         }
       }
 
-      .tabbar {
-        display: flex;
-        align-items: center;
+      :host {
         position: static;
         bottom: 0;
         left: 0;
+      }
+
+      .tabbar {
+        display: flex;
+        align-items: center;
         width: 100%;
         height: 64px;
         background: black;
@@ -1096,6 +1099,8 @@
         font-size: 32px;
         color: var(--color-text);
         opacity: 0.7;
+        border: 0;
+        background: transparent;
         transition: opacity 0.2s ease;
       }
 
