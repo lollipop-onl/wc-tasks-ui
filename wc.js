@@ -806,6 +806,13 @@
     }
     render() {
       return $`
+      <div class="taskItem -done">
+        <div class="title">${this.task.title}</div>
+        <div class="details">
+          <div class="due">${this.task.due}</div>
+          ${this.task.notes ? $`<div class="notes">${this.task.notes}</div>` : null}
+        </div>
+      </div>
       <p>${this.task.title}</p>
       ${this.task.notes ? $`<p>${this.task.notes}</p>` : null}
       ${this.completed ? $`<p>(Done)</p>` : null}
@@ -816,8 +823,26 @@
   OnlTaskItem.styles = [
     baseCss,
     r`
-      :host {
+      .taskItem {
+        height: 100%;
+        padding: 16px 8px;
         color: #ccc;
+        border-top: 1px solid #333;
+        transition: height 0.5s ease;
+      }
+
+      .taskItem.-done {
+        height: 0%;
+      }
+
+      .taskItem > .details {
+        display: flex;
+        align-items: center;
+      }
+
+      .taskItem > .details > .notes {
+        font-size: 12px;
+        color: #aaa;
       }
     `
   ];
@@ -897,16 +922,17 @@
         return $`
         <div class="summary -empty">
           <div class="title">${this.tasklist.title}</div>
-          <div class="count">${this.tasklist.items.length}</div>
         </div>
       `;
       }
       return $`
-      <details .open=${get(this.getLockrKey(), false)} @toggle=${this.onToggle}>
+      <details
+        .open=${get(this.getLockrKey(), false)}
+        @toggle=${this.onToggle}
+      >
         <summary>
           <div class="summary">
             <div class="title">${this.tasklist.title}</div>
-            <div class="count">${this.tasklist.items.length}</div>
           </div>
         </summary>
         <div>
@@ -934,7 +960,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 8px 16px;
+        padding: 16px 8px;
       }
 
       .summary > .title {
