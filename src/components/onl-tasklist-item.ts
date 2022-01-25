@@ -1,9 +1,14 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { baseCss } from 'style:base.css';
 import type { TaskSection } from 'type:task';
 
 @customElement('onl-tasklist-item')
 export class OnlTasklistItem extends LitElement {
+  static styles = [
+    baseCss,
+  ]
+
   @property({ type: String }) serviceUrl!: string;
 
   @property({ type: Object }) tasklist!: TaskSection;
