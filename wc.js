@@ -999,6 +999,48 @@
     window.open(serviceUrl, "_top");
   };
 
+  // src/components/onl-tasks.ts
+  var OnlTasks = class extends s4 {
+    constructor() {
+      super(...arguments);
+      this.completedTasks = [];
+    }
+    render() {
+      return $`
+      <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
+      ${this.tasks.map((tasklist) => $`
+          <onl-tasklist-item
+            .serviceUrl=${this.serviceUrl}
+            .tasklist=${tasklist}
+          ></onl-tasklist-item>
+        `)}
+    `;
+    }
+  };
+  __decorateClass([
+    e4({ type: String })
+  ], OnlTasks.prototype, "serviceUrl", 2);
+  __decorateClass([
+    e4({ type: Array })
+  ], OnlTasks.prototype, "tasks", 2);
+  __decorateClass([
+    t3()
+  ], OnlTasks.prototype, "completedTasks", 2);
+  OnlTasks = __decorateClass([
+    n5("onl-tasks")
+  ], OnlTasks);
+
+  // src/utils/dayjs.ts
+  var import_dayjs = __toESM(require_dayjs_min());
+  var import_relativeTime = __toESM(require_relativeTime());
+  var import_utc = __toESM(require_utc());
+  import_dayjs.default.extend(import_relativeTime.default);
+  import_dayjs.default.extend(import_utc.default);
+  var utc2date = (datetime) => {
+    const d2 = import_dayjs.default.utc(datetime);
+    return (0, import_dayjs.default)().year(d2.year()).month(d2.month()).date(d2.date()).endOf("date");
+  };
+
   // src/styles/base.css.ts
   var baseCss = r`
   /* Minimal CSS Reset */
@@ -1026,65 +1068,20 @@
     height: auto;
   }
 
+  /* Custom Properties */
+  :host {
+    --font-primary: 'Kiwi Maru', serif;
+  }
+
   /* Custom Reset CSS */
   :host {
     user-select: none;
   }
 
   :host, button, input, textarea {
-    font-family: 'Zen Kurenaido', sans-serif;
+    font-family: var(--font-primary);
   }
 `;
-
-  // src/components/onl-tasks.ts
-  var OnlTasks = class extends s4 {
-    constructor() {
-      super(...arguments);
-      this.completedTasks = [];
-    }
-    render() {
-      return $`
-      <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
-      ${this.tasks.map((tasklist) => $`
-          <onl-tasklist-item
-            .serviceUrl=${this.serviceUrl}
-            .tasklist=${tasklist}
-          ></onl-tasklist-item>
-        `)}
-    `;
-    }
-  };
-  OnlTasks.styles = [
-    baseCss,
-    r`
-      :host {
-        color: #ccc;
-      }
-    `
-  ];
-  __decorateClass([
-    e4({ type: String })
-  ], OnlTasks.prototype, "serviceUrl", 2);
-  __decorateClass([
-    e4({ type: Array })
-  ], OnlTasks.prototype, "tasks", 2);
-  __decorateClass([
-    t3()
-  ], OnlTasks.prototype, "completedTasks", 2);
-  OnlTasks = __decorateClass([
-    n5("onl-tasks")
-  ], OnlTasks);
-
-  // src/utils/dayjs.ts
-  var import_dayjs = __toESM(require_dayjs_min());
-  var import_relativeTime = __toESM(require_relativeTime());
-  var import_utc = __toESM(require_utc());
-  import_dayjs.default.extend(import_relativeTime.default);
-  import_dayjs.default.extend(import_utc.default);
-  var utc2date = (datetime) => {
-    const d2 = import_dayjs.default.utc(datetime);
-    return (0, import_dayjs.default)().year(d2.year()).month(d2.month()).date(d2.date()).endOf("date");
-  };
 
   // src/components/onl-task-item.ts
   var OnlTaskItem = class extends s4 {
