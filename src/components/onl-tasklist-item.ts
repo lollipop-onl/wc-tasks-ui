@@ -19,6 +19,7 @@ export class OnlTasklistItem extends LitElement {
         justify-content: space-between;
         align-items: center;
         padding: 16px 8px;
+        color: #ccc;
       }
 
       .summary > .title {
