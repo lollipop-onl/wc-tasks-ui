@@ -29,7 +29,7 @@ export class OnlHeader extends LitElement {
       .header::after {
         content: '';
         position: absolute;
-        bottom: 2px;
+        bottom: -2px;
         left: 0;
         width: 100%;
         height: 2px;
