@@ -45,12 +45,16 @@ export class OnlReloadTimer extends LitElement {
 
   @property({ type: String }) serviceUrl!: string;
 
-  @state() timerId!: number;
-
   constructor() {
     super();
+  }
 
-    this.timerId = setTimeout(() => {
+  public connectedCallback() {
+    super.connectedCallback();
+
+    setTimeout(() => {
+      console.log('fired reload timer!');
+
       reloadWindow(this.serviceUrl);
     }, RELOAD_INTERVAL_MINUTES * 60 * 1000);
   }
