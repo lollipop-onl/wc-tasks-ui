@@ -703,13 +703,14 @@
         left: 0;
         width: 100%;
         height: 64px;
+        border-bottom: 2px solid #444;
         background: black;
       }
 
       .header::after {
         content: '';
         position: absolute;
-        bottom: 0;
+        bottom: 2px;
         left: 0;
         width: 100%;
         height: 2px;
