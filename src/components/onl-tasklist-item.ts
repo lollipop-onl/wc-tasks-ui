@@ -58,19 +58,19 @@ export class OnlTasklistItem extends LitElement {
 
   @state() isOpened = false;
 
-  private get lockrKey(): string {
-    return `isopen_tasklist_${this.tasklist.id}`;
-  }
-
   constructor() {
     super()
 
-    this.isOpened = Lockr.get(this.lockrKey, false);
+    this.isOpened = Lockr.get(this.getLockrKey(), false);
+  }
+
+  private getLockrKey(): string {
+    return `isopen_tasklist_${this.tasklist.id}`;
   }
 
   private onToggle(e: Event) {
     if (e.target instanceof HTMLDetailsElement) {
-      Lockr.set(this.lockrKey, e.target.open);
+      Lockr.set(this.getLockrKey(), e.target.open);
     }
   }
 
