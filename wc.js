@@ -647,6 +647,7 @@
   var baseCss = r`
   :host {
     font-family: 'Zen Kurenaido', sans-serif;
+    user-select: none;
   }
 `;
 
