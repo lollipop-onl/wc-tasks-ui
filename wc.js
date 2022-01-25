@@ -1299,13 +1299,7 @@
       }
 
       .summary > .icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 42px;
-        height: 42px;
-        border: 1px solid #333;
-        border-radius: 50%;
+        font-size: 28px;
       }
 
       .summary.-empty {
@@ -1316,8 +1310,8 @@
         font-weight: normal;
       }
 
-      details[open] .icon.-opened,
-      details:not([open]) .icon.-closed {
+      details[open] .icon.-closed,
+      details:not([open]) .icon.-opened {
         display: none;
       }
     `
