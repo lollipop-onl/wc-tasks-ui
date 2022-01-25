@@ -18,7 +18,7 @@ export class OnlTasklistItem extends LitElement {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 8px 16px;
+        padding: 16px 8px;
       }
 
       .summary > .title {
@@ -71,17 +71,18 @@ export class OnlTasklistItem extends LitElement {
       return html`
         <div class="summary -empty">
           <div class="title">${this.tasklist.title}</div>
-          <div class="count">${this.tasklist.items.length}</div>
         </div>
       `
     }
 
     return html`
-      <details .open=${Lockr.get(this.getLockrKey(), false)} @toggle=${this.onToggle}>
+      <details
+        .open=${Lockr.get(this.getLockrKey(), false)}
+        @toggle=${this.onToggle}
+      >
         <summary>
           <div class="summary">
             <div class="title">${this.tasklist.title}</div>
-            <div class="count">${this.tasklist.items.length}</div>
           </div>
         </summary>
         <div>

@@ -8,8 +8,26 @@ export class OnlTaskItem extends LitElement {
   static styles = [
     baseCss,
     css`
-      :host {
+      .taskItem {
+        height: 100%;
+        padding: 16px 8px;
         color: #ccc;
+        border-top: 1px solid #333;
+        transition: height 0.5s ease;
+      }
+
+      .taskItem.-done {
+        height: 0%;
+      }
+
+      .taskItem > .details {
+        display: flex;
+        align-items: center;
+      }
+
+      .taskItem > .details > .notes {
+        font-size: 12px;
+        color: #aaa;
       }
     `,
   ];
@@ -42,6 +60,13 @@ export class OnlTaskItem extends LitElement {
 
   public render() {
     return html`
+      <div class="taskItem -done">
+        <div class="title">${this.task.title}</div>
+        <div class="details">
+          <div class="due">${this.task.due}</div>
+          ${ this.task.notes ? html`<div class="notes">${this.task.notes}</div>` : null }
+        </div>
+      </div>
       <p>${this.task.title}</p>
       ${this.task.notes ? html`<p>${this.task.notes}</p>` : null}
       ${this.completed ? html`<p>(Done)</p>` : null}
