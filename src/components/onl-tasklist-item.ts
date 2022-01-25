@@ -8,11 +8,16 @@ export class OnlTasklistItem extends LitElement {
   static styles = [
     baseCss,
     css`
+      summary {
+        display: block;
+        list-style: none;
+      }
+
       .summary {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         padding: 8px 16px;
-        list-style: none;
       }
 
       .summary > .title {
