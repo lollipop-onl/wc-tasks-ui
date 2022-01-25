@@ -9,7 +9,7 @@ export class OnlHeader extends LitElement {
     css`
       @keyframes progress {
         0% {
-          transform: scale3d(1, 0, 1);
+          transform: scale3d(0, 1, 1);
         }
         100% {
           transform: scale3d(1, 1, 1);
