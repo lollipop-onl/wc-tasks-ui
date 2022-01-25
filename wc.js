@@ -904,6 +904,7 @@
       .summary > .title {
         overflow: hidden;
         font-size: 18px;
+        font-weight: bold;
         white-space: nowrap;
         text-overflow: ellipsis;
       }
@@ -920,6 +921,14 @@
         font-size: 20px;
         border: 1px solid #333;
         border-radius: 50%;
+      }
+
+      .summary.-empty {
+        opacity: 0.8;
+      }
+
+      .summary.-empty > .title {
+        font-weight: normal;
       }
     `
   ];
