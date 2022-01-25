@@ -15,39 +15,16 @@ export class OnlTasks extends LitElement {
     `,
   ];
 
-  constructor() {
-    super();
-
-    if ('AmbientLightSensor' in window) {
-      const sensor = new (window as any).AmbientLightSensor();
-
-      sensor.onreading = () => {
-        this.illuminance = sensor.illuminance;
-      };
-
-      sensor.onerror = (event: any) => {
-        alert(`${event.error.name}: ${event.error.message}`);
-      };
-
-      sensor.start();
-    }
-  }
-
   @property({ type: String }) serviceUrl!: string;
 
   @property({ type: Array }) tasks!: TaskSection[];
 
   @state() completedTasks: string[] = [];
 
-  @state() illuminance: number | null = null;
-
   public render() {
     return html`
       <onl-reload-timer .serviceUrl=${this.serviceUrl}></onl-reload-timer>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
-      ${this.illuminance != null ? html`
-        <p>Illuminance: ${this.illuminance}lx</p>
-      ` : null}
       ${this.tasks.map((tasklist) => (
         html`
           <onl-tasklist-item

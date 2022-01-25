@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import Lockr from 'lockr';
 import { baseCss } from 'style:base.css';
 import type { TaskSection } from 'type:task';
 
@@ -31,6 +32,7 @@ export class OnlTasklistItem extends LitElement {
       .summary > .count {
         flex-shrink: 0;
         min-width: 3em;
+        box-sizing: border-box;
         padding: 4px 8px;
         margin-left: 16px;
         color: #ccc;
@@ -54,6 +56,24 @@ export class OnlTasklistItem extends LitElement {
 
   @property({ type: Object }) tasklist!: TaskSection;
 
+  @state() isOpened = false;
+
+  private get lockrKey(): string {
+    return `isopen_tasklist_${this.tasklist.id}`;
+  }
+
+  constructor() {
+    super()
+
+    this.isOpened = Lockr.get(this.lockrKey, false);
+  }
+
+  private onToggle(e: Event) {
+    if (e.target instanceof HTMLDetailsElement) {
+      Lockr.set(this.lockrKey, e.target.open);
+    }
+  }
+
   render() {
     if (this.tasklist.items.length === 0) {
       return html`
@@ -65,7 +85,7 @@ export class OnlTasklistItem extends LitElement {
     }
 
     return html`
-      <details>
+      <details .open=${this.isOpened} @toggle=${this.onToggle}>
         <summary>
           <div class="summary">
             <div class="title">${this.tasklist.title}</div>

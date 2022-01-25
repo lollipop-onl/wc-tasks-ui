@@ -155,6 +155,11 @@ lit@^2.1.1:
     lit-element "^3.1.0"
     lit-html "^2.1.0"
 
+lockr@^0.9.0-beta.0:
+  version "0.9.0-beta.0"
+  resolved "https://registry.yarnpkg.com/lockr/-/lockr-0.9.0-beta.0.tgz#2d13863699a0b358fbe5b8b4d6c6af7913e655bb"
+  integrity sha512-/00iP8I+RJStGkExa8bW5yl1tIyxZvYS1eM5S8ze9D8A73QOxXMSE0lijF37b2HryyqzFJi7vS9LdurTX5e/CA==
+
 typescript@^4.5.5:
   version "4.5.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.5.tgz#d8c953832d28924a9e3d37c73d729c846c5896f3"
