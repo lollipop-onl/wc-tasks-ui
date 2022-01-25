@@ -911,10 +911,12 @@
 
       .summary > .count {
         flex-shrink: 0;
+        min-width: 3em;
         padding: 4px 8px;
-        margin-left: 8px;
+        margin-left: 16px;
         color: #ccc;
         line-height: 1;
+        text-align: center;
         border: 1px solid #555;
         border-radius: 4px;
       }
