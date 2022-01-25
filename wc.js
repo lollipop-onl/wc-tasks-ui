@@ -806,7 +806,10 @@
     }
     render() {
       return $`
-      <div class="taskItem" .data-done=${this.completed}>
+      <div
+        class="taskItem"
+        .aria-hidden=${this.completed.toString()}
+      >
         <div class="title">${this.task.title}</div>
         <div class="details">
           <div class="due">${this.task.due}</div>
