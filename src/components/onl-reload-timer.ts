@@ -1,9 +1,12 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { reloadWindow } from 'util:reload';
 import { baseCss } from 'style:base.css';
 
-@customElement('onl-header')
-export class OnlHeader extends LitElement {
+const RELOAD_INTERVAL_MINUTES = 3;
+
+@customElement('onl-reload-timer')
+export class OnlReloadTimer extends LitElement {
   static styles = [
     baseCss,
     css`
@@ -16,35 +19,45 @@ export class OnlHeader extends LitElement {
         }
       }
 
-      .header {
+      .progressBar {
         position: sticky;
         top: 0;
         left: 0;
         width: 100%;
-        height: 64px;
-        border-bottom: 2px solid #444;
+        height: 20px;
+        border-bottom: 2px solid #222;
         background: black;
       }
 
-      .header::after {
+      .progressBar::after {
         content: '';
         position: absolute;
         bottom: -2px;
         left: 0;
         width: 100%;
         height: 2px;
-        background: red;
+        background: #eab308;
         transform-origin: left top;
-        animation: progress 300s;
+        animation: progress ${RELOAD_INTERVAL_MINUTES * 60}s linear;
       }
     `,
   ];
 
+  @property({ type: String }) serviceUrl!: string;
+
+  @state() timerId!: number;
+
+  constructor() {
+    super();
+
+    this.timerId = setTimeout(() => {
+      reloadWindow(this.serviceUrl);
+    }, RELOAD_INTERVAL_MINUTES * 60 * 1000);
+  }
+
   render() {
     return html`
-      <header class="header">
-
-      </header>
+      <div class="progressBar"></div>
     `
   }
 }

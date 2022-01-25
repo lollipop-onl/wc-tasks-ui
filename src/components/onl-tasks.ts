@@ -31,10 +31,6 @@ export class OnlTasks extends LitElement {
 
       sensor.start();
     }
-
-    setInterval(() => {
-      reloadWindow(this.serviceUrl);
-    }, 5 * 60 * 1000);
   }
 
   @property({ type: String }) serviceUrl!: string;
@@ -65,7 +61,7 @@ export class OnlTasks extends LitElement {
 
   public render() {
     return html`
-      <onl-header></onl-header>
+      <onl-reload-timer .serviceUrl=${this.serviceUrl}></onl-reload-timer>
       <pre>${'AmbientLightSensor' in window}</pre>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.illuminance != null ? html`
