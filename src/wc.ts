@@ -1,3 +1,4 @@
-export * from './components/onl-reload-timer';
-export * from './components/onl-tasks';
-export * from './components/onl-task-item';
+export * from 'component:onl-reload-timer';
+export * from 'component:onl-tasks';
+export * from 'component:onl-task-item';
+export * from 'component:onl-tasklist-item';

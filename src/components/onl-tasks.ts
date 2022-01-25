@@ -62,27 +62,16 @@ export class OnlTasks extends LitElement {
   public render() {
     return html`
       <onl-reload-timer .serviceUrl=${this.serviceUrl}></onl-reload-timer>
-      <pre>${'AmbientLightSensor' in window}</pre>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.illuminance != null ? html`
         <p>Illuminance: ${this.illuminance}lx</p>
       ` : null}
-      ${this.tasks.map(({ id: tasklistId, title, items }) => (
+      ${this.tasks.map((tasklist) => (
         html`
-          <h1>${title}</h1>
-          <ol>
-            ${items.map((task) => (
-              html`
-                <li>
-                  <onl-task-item
-                    .serviceUrl=${this.serviceUrl}
-                    .tasklistId=${tasklistId}
-                    .task=${task}
-                  ></onl-task-item>
-                </li>
-              `
-            ))}
-          </ol>
+          <onl-tasklist-item
+            .serviceUrl=${this.serviceUrl}
+            .tasklist=${tasklist}
+          ></onl-tasklist-item>
         `
       ))}
       <p>Hello, world.</p>
