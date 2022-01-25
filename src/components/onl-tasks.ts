@@ -39,7 +39,7 @@ export class OnlTasks extends LitElement {
 
   @property({ type: String }) serviceUrl!: string;
 
-  @property({ type: Object }) tasks!: TaskSection[];
+  @property({ type: Array }) tasks!: TaskSection[];
 
   @state() completedTasks: string[] = [];
 
@@ -65,7 +65,7 @@ export class OnlTasks extends LitElement {
 
   public render() {
     return html`
-      <onl-header />
+      <onl-header></onl-header>
       <pre>${'AmbientLightSensor' in window}</pre>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.illuminance != null ? html`

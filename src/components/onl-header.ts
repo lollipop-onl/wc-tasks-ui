@@ -7,6 +7,15 @@ export class OnlHeader extends LitElement {
   static styles = [
     baseCss,
     css`
+      @keyframes progress {
+        0% {
+          transform: scale3d(1, 0, 1);
+        }
+        100% {
+          transform: scale3d(1, 1, 1);
+        }
+      }
+
       .header {
         position: sticky;
         top: 0;
@@ -14,7 +23,17 @@ export class OnlHeader extends LitElement {
         width: 100%;
         height: 64px;
         background: black;
-        border-bottom: 2px solid red;
+      }
+
+      .header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: red;
+        animation: progress 300s;
       }
     `,
   ];
