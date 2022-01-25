@@ -21,6 +21,7 @@ export class OnlTasks extends LitElement {
             .serviceUrl=${this.serviceUrl}
             .tasklist=${tasklist}
           ></onl-tasklist-item>
+          <onl-tabbar .serviceUrl=${this.serviceUrl}></onl-tabbar>
         `
       ))}
     `;

@@ -28,6 +28,8 @@ export const baseCss = css`
 
   /* Custom Properties */
   :host {
+    --color-primary: #4ECDC4;
+    --color-text: #ccc;
     --font-primary: 'M PLUS Rounded 1c', sans-serif;
   }
 
