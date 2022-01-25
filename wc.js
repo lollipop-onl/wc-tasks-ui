@@ -757,24 +757,6 @@
         sensor.start();
       }
     }
-    completeTask(tasklistId, taskId) {
-      return __async(this, null, function* () {
-        yield fetch(this.serviceUrl, {
-          method: "POST",
-          mode: "no-cors",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            action: "complete_task",
-            tasklist: tasklistId,
-            task: taskId
-          })
-        });
-        this.completedTasks.push(taskId);
-      });
-    }
     render() {
       return $`
       <onl-reload-timer .serviceUrl=${this.serviceUrl}></onl-reload-timer>
@@ -788,7 +770,6 @@
             .tasklist=${tasklist}
           ></onl-tasklist-item>
         `)}
-      <p>Hello, world.</p>
     `;
     }
   };
@@ -841,7 +822,6 @@
       });
     }
     render() {
-      console.log(this.task);
       return $`
       <p>${this.task.title}</p>
       ${this.task.notes ? $`<p>${this.task.notes}</p>` : null}
@@ -879,7 +859,12 @@
     render() {
       return $`
       <details>
-        <summary>${this.tasklist.title} (${this.tasklist.items.length})</summary>
+        <summary>
+          <div class="summary">
+            <div class="title">${this.tasklist.title}</div>
+            <div class="count">${this.tasklist.items.length}</div>
+          </div>
+        </summary>
         <div>
           ${this.tasklist.items.map((task) => $`
               <onl-task-item
@@ -894,7 +879,39 @@
     }
   };
   OnlTasklistItem.styles = [
-    baseCss
+    baseCss,
+    r`
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .summary {
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+      }
+
+      .summary > .title {
+        overflow: hidden;
+        font-size: 18px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .summary > .count {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        margin-left: 8px;
+        color: #ccc;
+        font-size: 20px;
+        border: 1px solid #333;
+        border-radius: 50%;
+      }
+    `
   ];
   __decorateClass([
     e4({ type: String })
