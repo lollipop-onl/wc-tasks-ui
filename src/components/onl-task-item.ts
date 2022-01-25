@@ -16,7 +16,7 @@ export class OnlTaskItem extends LitElement {
         transition: max-height 0.5s ease;
       }
 
-      .taskItem[data-done] {
+      .taskItem[aria-hidden=true] {
         max-height: 0;
       }
 
