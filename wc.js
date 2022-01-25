@@ -1128,14 +1128,13 @@
     }
     render() {
       return $`
-      <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.tasks.map((tasklist) => $`
           <onl-tasklist-item
             .serviceUrl=${this.serviceUrl}
             .tasklist=${tasklist}
           ></onl-tasklist-item>
-          <onl-tabbar .serviceUrl=${this.serviceUrl}></onl-tabbar>
         `)}
+      <onl-tabbar .serviceUrl=${this.serviceUrl}></onl-tabbar>
     `;
     }
   };
