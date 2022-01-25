@@ -16,7 +16,7 @@ export class OnlTaskItem extends LitElement {
         transition: max-height 0.5s ease;
       }
 
-      .taskItem.-done {
+      .taskItem[data-done] {
         max-height: 0;
       }
 
@@ -60,7 +60,7 @@ export class OnlTaskItem extends LitElement {
 
   public render() {
     return html`
-      <div .class=${`taskItem ${this.completed ? '-done' : null}`}>
+      <div class="taskItem" .data-done=${this.completed}>
         <div class="title">${this.task.title}</div>
         <div class="details">
           <div class="due">${this.task.due}</div>
