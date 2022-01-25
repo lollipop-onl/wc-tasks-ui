@@ -1070,7 +1070,7 @@
 
   /* Custom Properties */
   :host {
-    --font-primary: 'Kiwi Maru', serif;
+    --font-primary: 'M PLUS Rounded 1c', sans-serif;
   }
 
   /* Custom Reset CSS */
@@ -1079,6 +1079,7 @@
   }
 
   :host, button, input, textarea {
+    font-weight: 300;
     font-family: var(--font-primary);
   }
 `;
