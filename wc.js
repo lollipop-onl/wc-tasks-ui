@@ -999,48 +999,6 @@
     window.open(serviceUrl, "_top");
   };
 
-  // src/components/onl-tasks.ts
-  var OnlTasks = class extends s4 {
-    constructor() {
-      super(...arguments);
-      this.completedTasks = [];
-    }
-    render() {
-      return $`
-      <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
-      ${this.tasks.map((tasklist) => $`
-          <onl-tasklist-item
-            .serviceUrl=${this.serviceUrl}
-            .tasklist=${tasklist}
-          ></onl-tasklist-item>
-        `)}
-    `;
-    }
-  };
-  __decorateClass([
-    e4({ type: String })
-  ], OnlTasks.prototype, "serviceUrl", 2);
-  __decorateClass([
-    e4({ type: Array })
-  ], OnlTasks.prototype, "tasks", 2);
-  __decorateClass([
-    t3()
-  ], OnlTasks.prototype, "completedTasks", 2);
-  OnlTasks = __decorateClass([
-    n5("onl-tasks")
-  ], OnlTasks);
-
-  // src/utils/dayjs.ts
-  var import_dayjs = __toESM(require_dayjs_min());
-  var import_relativeTime = __toESM(require_relativeTime());
-  var import_utc = __toESM(require_utc());
-  import_dayjs.default.extend(import_relativeTime.default);
-  import_dayjs.default.extend(import_utc.default);
-  var utc2date = (datetime) => {
-    const d2 = import_dayjs.default.utc(datetime);
-    return (0, import_dayjs.default)().year(d2.year()).month(d2.month()).date(d2.date()).endOf("date");
-  };
-
   // src/styles/base.css.ts
   var baseCss = r`
   /* Minimal CSS Reset */
@@ -1070,6 +1028,8 @@
 
   /* Custom Properties */
   :host {
+    --color-primary: #4ECDC4;
+    --color-text: #ccc;
     --font-primary: 'M PLUS Rounded 1c', sans-serif;
   }
 
@@ -1083,6 +1043,125 @@
     font-family: var(--font-primary);
   }
 `;
+
+  // src/components/onl-tabbar.ts
+  var OnlTabbar = class extends s4 {
+    constructor() {
+      super(...arguments);
+      this.reloaded = false;
+    }
+    reload() {
+      this.reloaded = true;
+      reloadWindow(this.serviceUrl);
+    }
+    render() {
+      return $`
+      <div class="tabbar">
+        <button class="reload" .disabled=${this.reloaded} @click=${this.reload}>
+          <i class="fas fa-redo"></i>
+        </button>
+      </div>
+    `;
+    }
+  };
+  OnlTabbar.styles = [
+    baseCss,
+    r`
+      @keyframes rotate {
+        0% {
+          transform: rotate3d(0, 0, 0, 0deg);
+        }
+        100% {
+          transform: rotate3d(0, 0, 0, 1800deg);
+        }
+      }
+
+      .tabbar {
+        display: flex;
+        align-items: center;
+        position: static;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 64px;
+        background: black;
+      }
+
+      .reload {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+        font-size: 32px;
+        color: var(--color-text);
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+      }
+
+      .reload:hover,
+      .reload:disabled {
+        opacity: 1;
+      }
+
+      .reload:hover > i,
+      .reload:disabled > i {
+        animation: rotate 3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+    `
+  ];
+  __decorateClass([
+    e4({ type: String })
+  ], OnlTabbar.prototype, "serviceUrl", 2);
+  __decorateClass([
+    t3()
+  ], OnlTabbar.prototype, "reloaded", 2);
+  OnlTabbar = __decorateClass([
+    n5("onl-tabbar")
+  ], OnlTabbar);
+
+  // src/components/onl-tasks.ts
+  var OnlTasks = class extends s4 {
+    constructor() {
+      super(...arguments);
+      this.completedTasks = [];
+    }
+    render() {
+      return $`
+      <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
+      ${this.tasks.map((tasklist) => $`
+          <onl-tasklist-item
+            .serviceUrl=${this.serviceUrl}
+            .tasklist=${tasklist}
+          ></onl-tasklist-item>
+          <onl-tabbar .serviceUrl=${this.serviceUrl}></onl-tabbar>
+        `)}
+    `;
+    }
+  };
+  __decorateClass([
+    e4({ type: String })
+  ], OnlTasks.prototype, "serviceUrl", 2);
+  __decorateClass([
+    e4({ type: Array })
+  ], OnlTasks.prototype, "tasks", 2);
+  __decorateClass([
+    t3()
+  ], OnlTasks.prototype, "completedTasks", 2);
+  OnlTasks = __decorateClass([
+    n5("onl-tasks")
+  ], OnlTasks);
+
+  // src/utils/dayjs.ts
+  var import_dayjs = __toESM(require_dayjs_min());
+  var import_relativeTime = __toESM(require_relativeTime());
+  var import_utc = __toESM(require_utc());
+  import_dayjs.default.extend(import_relativeTime.default);
+  import_dayjs.default.extend(import_utc.default);
+  var utc2date = (datetime) => {
+    const d2 = import_dayjs.default.utc(datetime);
+    return (0, import_dayjs.default)().year(d2.year()).month(d2.month()).date(d2.date()).endOf("date");
+  };
 
   // src/components/onl-task-item.ts
   var OnlTaskItem = class extends s4 {
