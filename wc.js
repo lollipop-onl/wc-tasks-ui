@@ -643,6 +643,13 @@
     window.open(serviceUrl, "_top");
   };
 
+  // src/styles/base.css.ts
+  var baseCss = r`
+  :host {
+    font-family: 'Zen Kurenaido', sans-serif;
+  }
+`;
+
   // src/components/onl-tasks.ts
   var OnlTasks = class extends s4 {
     constructor() {
@@ -706,11 +713,14 @@
     `;
     }
   };
-  OnlTasks.styles = r`
-    :host {
-      color: white;
-    }
-  `;
+  OnlTasks.styles = [
+    baseCss,
+    r`
+      :host {
+        color: #ccc;
+      }
+    `
+  ];
   __decorateClass([
     e4({ type: String })
   ], OnlTasks.prototype, "serviceUrl", 2);
@@ -761,12 +771,14 @@
     `;
     }
   };
-  OnlTaskItem.styles = r`
-    :host {
-      font-family: 'Zen Kurenaido', sans-serif;
-      color: #ccc;
-    }
-  `;
+  OnlTaskItem.styles = [
+    baseCss,
+    r`
+      :host {
+        color: #ccc;
+      }
+    `
+  ];
   __decorateClass([
     e4({ type: String })
   ], OnlTaskItem.prototype, "serviceUrl", 2);
