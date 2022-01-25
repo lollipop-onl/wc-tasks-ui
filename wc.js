@@ -712,8 +712,9 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 8px;
+        height: 2px;
         background: red;
+        transform-origin: left top;
         animation: progress 300s;
       }
     `
