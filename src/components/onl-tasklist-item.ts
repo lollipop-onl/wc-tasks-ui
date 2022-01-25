@@ -29,17 +29,13 @@ export class OnlTasklistItem extends LitElement {
       }
 
       .summary > .count {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         flex-shrink: 0;
-        width: 32px;
-        height: 32px;
+        padding: 4px 8px;
         margin-left: 8px;
         color: #ccc;
-        font-size: 20px;
-        border: 1px solid #333;
-        border-radius: 50%;
+        line-height: 1;
+        border: 1px solid #555;
+        border-radius: 4px;
       }
 
       .summary.-empty {
@@ -59,7 +55,7 @@ export class OnlTasklistItem extends LitElement {
   render() {
     if (this.tasklist.items.length === 0) {
       return html`
-        <div class="summary">
+        <div class="summary -empty">
           <div class="title">${this.tasklist.title}</div>
           <div class="count">${this.tasklist.items.length}</div>
         </div>
