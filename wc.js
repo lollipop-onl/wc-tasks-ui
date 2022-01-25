@@ -857,6 +857,14 @@
   // src/components/onl-tasklist-item.ts
   var OnlTasklistItem = class extends s4 {
     render() {
+      if (this.tasklist.items.length === 0) {
+        return $`
+        <div class="summary">
+          <div class="title">${this.tasklist.title}</div>
+          <div class="count">${this.tasklist.items.length}</div>
+        </div>
+      `;
+      }
       return $`
       <details>
         <summary>
@@ -881,14 +889,11 @@
   OnlTasklistItem.styles = [
     baseCss,
     r`
-      summary::marker {
-        display: none;
-      }
-
       .summary {
         display: flex;
         align-items: center;
         padding: 8px 16px;
+        list-style: none;
       }
 
       .summary > .title {
