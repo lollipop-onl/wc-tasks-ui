@@ -17,13 +17,10 @@ export class OnlTabbar extends LitElement {
         }
       }
 
-      :host {
-        position: static;
+      .tabbar {
+        position: sticky;
         bottom: 0;
         left: 0;
-      }
-
-      .tabbar {
         display: flex;
         align-items: center;
         width: 100%;
@@ -71,7 +68,7 @@ export class OnlTabbar extends LitElement {
     return html`
       <div class="tabbar">
         <button class="reload" .disabled=${this.reloaded} @click=${this.reload}>
-          <i class="fas fa-redo"></i>
+          ↻
         </button>
       </div>
     `
