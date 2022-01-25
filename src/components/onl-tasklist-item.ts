@@ -48,8 +48,8 @@ export class OnlTasklistItem extends LitElement {
         font-weight: normal;
       }
 
-      summary[open] .icon.-opened,
-      summary:not([open]) .icon.-closed {
+      details[open] .icon.-opened,
+      details:not([open]) .icon.-closed {
         display: none;
       }
     `
