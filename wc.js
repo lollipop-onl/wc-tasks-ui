@@ -1036,67 +1036,6 @@
   }
 `;
 
-  // src/components/onl-reload-timer.ts
-  var RELOAD_INTERVAL_MINUTES = 3;
-  var OnlReloadTimer = class extends s4 {
-    constructor() {
-      super();
-    }
-    connectedCallback() {
-      super.connectedCallback();
-      setTimeout(() => {
-        console.log("fired reload timer!", this.serviceUrl);
-        reloadWindow(this.serviceUrl);
-      }, RELOAD_INTERVAL_MINUTES * 60 * 1e3);
-    }
-    render() {
-      return $`
-      <div class="progressBar"></div>
-    `;
-    }
-  };
-  OnlReloadTimer.styles = [
-    baseCss,
-    r`
-      @keyframes progress {
-        0% {
-          transform: scale3d(0, 1, 1);
-        }
-        100% {
-          transform: scale3d(1, 1, 1);
-        }
-      }
-
-      .progressBar {
-        position: sticky;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 20px;
-        border-bottom: 2px solid #222;
-        background: black;
-      }
-
-      .progressBar::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: #eab308;
-        transform-origin: left top;
-        animation: progress ${RELOAD_INTERVAL_MINUTES * 60}s linear;
-      }
-    `
-  ];
-  __decorateClass([
-    e4({ type: String })
-  ], OnlReloadTimer.prototype, "serviceUrl", 2);
-  OnlReloadTimer = __decorateClass([
-    n5("onl-reload-timer")
-  ], OnlReloadTimer);
-
   // src/components/onl-tasks.ts
   var OnlTasks = class extends s4 {
     constructor() {
@@ -1105,9 +1044,6 @@
     }
     render() {
       return $`
-      <onl-reload-timer
-        .serviceUrl=${this.serviceUrl}
-      ></onl-reload-timer>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.tasks.map((tasklist) => $`
           <onl-tasklist-item
