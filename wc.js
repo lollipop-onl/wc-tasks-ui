@@ -685,7 +685,11 @@
   var OnlReloadTimer = class extends s4 {
     constructor() {
       super();
-      this.timerId = setTimeout(() => {
+    }
+    connectedCallback() {
+      super.connectedCallback();
+      setTimeout(() => {
+        console.log("fired reload timer!");
         reloadWindow(this.serviceUrl);
       }, RELOAD_INTERVAL_MINUTES * 60 * 1e3);
     }
@@ -733,9 +737,6 @@
   __decorateClass([
     e4({ type: String })
   ], OnlReloadTimer.prototype, "serviceUrl", 2);
-  __decorateClass([
-    t3()
-  ], OnlReloadTimer.prototype, "timerId", 2);
   OnlReloadTimer = __decorateClass([
     n5("onl-reload-timer")
   ], OnlReloadTimer);
