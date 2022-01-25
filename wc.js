@@ -638,15 +638,10 @@
   var n6;
   var e5 = ((n6 = window.HTMLSlotElement) === null || n6 === void 0 ? void 0 : n6.prototype.assignedElements) != null ? (o6, n7) => o6.assignedElements(n7) : (o6, n7) => o6.assignedNodes(n7).filter((o7) => o7.nodeType === Node.ELEMENT_NODE);
 
-  // src/utils/reload.ts
-  var reloadWindow = (serviceUrl) => {
-    window.open(serviceUrl, "_top");
-  };
-
   // src/styles/base.css.ts
   var baseCss = r`
   /* Minimal CSS Reset */
-  html {
+  :host {
     box-sizing: border-box;
     font-size: 16px;
   }
@@ -655,7 +650,7 @@
     box-sizing: inherit;
   }
 
-  body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  h1, h2, h3, h4, h5, h6, p, ol, ul {
     margin: 0;
     padding: 0;
     font-weight: normal;
@@ -670,6 +665,7 @@
     height: auto;
   }
 
+  /* Custom Reset CSS */
   :host {
     user-select: none;
   }
@@ -678,6 +674,39 @@
     font-family: 'Zen Kurenaido', sans-serif;
   }
 `;
+
+  // src/components/onl-header.ts
+  var OnlHeader = class extends s4 {
+    render() {
+      return $`
+      <header class="header">
+
+      </header>
+    `;
+    }
+  };
+  OnlHeader.styles = [
+    baseCss,
+    r`
+      .header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 64px;
+        background: black;
+        border-bottom: 2px solid red;
+      }
+    `
+  ];
+  OnlHeader = __decorateClass([
+    n5("onl-header")
+  ], OnlHeader);
+
+  // src/utils/reload.ts
+  var reloadWindow = (serviceUrl) => {
+    window.open(serviceUrl, "_top");
+  };
 
   // src/components/onl-tasks.ts
   var OnlTasks = class extends s4 {
@@ -719,6 +748,7 @@
     }
     render() {
       return $`
+      <onl-header />
       <pre>${"AmbientLightSensor" in window}</pre>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.illuminance != null ? $`
