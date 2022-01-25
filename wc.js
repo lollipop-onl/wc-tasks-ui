@@ -1106,8 +1106,7 @@
         opacity: 1;
       }
 
-      .reload:hover > i,
-      .reload:disabled > i {
+      .reload:disabled {
         animation: rotate 3s cubic-bezier(0.16, 1, 0.3, 1);
       }
     `
