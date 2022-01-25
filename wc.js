@@ -808,7 +808,7 @@
       return $`
       <div
         class="taskItem"
-        .aria-hidden=${this.completed.toString()}
+        .ariaHidden=${this.completed.toString()}
       >
         <div class="title">${this.task.title}</div>
         <div class="details">
