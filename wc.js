@@ -638,6 +638,11 @@
   var n6;
   var e5 = ((n6 = window.HTMLSlotElement) === null || n6 === void 0 ? void 0 : n6.prototype.assignedElements) != null ? (o6, n7) => o6.assignedElements(n7) : (o6, n7) => o6.assignedNodes(n7).filter((o7) => o7.nodeType === Node.ELEMENT_NODE);
 
+  // src/utils/reload.ts
+  var reloadWindow = (serviceUrl) => {
+    window.open(serviceUrl, "_top");
+  };
+
   // src/styles/base.css.ts
   var baseCss = r`
   /* Minimal CSS Reset */
@@ -675,17 +680,22 @@
   }
 `;
 
-  // src/components/onl-header.ts
-  var OnlHeader = class extends s4 {
+  // src/components/onl-reload-timer.ts
+  var RELOAD_INTERVAL_MINUTES = 3;
+  var OnlReloadTimer = class extends s4 {
+    constructor() {
+      super();
+      this.timerId = setTimeout(() => {
+        reloadWindow(this.serviceUrl);
+      }, RELOAD_INTERVAL_MINUTES * 60 * 1e3);
+    }
     render() {
       return $`
-      <header class="header">
-
-      </header>
+      <div class="progressBar"></div>
     `;
     }
   };
-  OnlHeader.styles = [
+  OnlReloadTimer.styles = [
     baseCss,
     r`
       @keyframes progress {
@@ -697,37 +707,38 @@
         }
       }
 
-      .header {
+      .progressBar {
         position: sticky;
         top: 0;
         left: 0;
         width: 100%;
-        height: 64px;
-        border-bottom: 2px solid #444;
+        height: 20px;
+        border-bottom: 2px solid #222;
         background: black;
       }
 
-      .header::after {
+      .progressBar::after {
         content: '';
         position: absolute;
         bottom: -2px;
         left: 0;
         width: 100%;
         height: 2px;
-        background: red;
+        background: #eab308;
         transform-origin: left top;
-        animation: progress 300s;
+        animation: progress ${RELOAD_INTERVAL_MINUTES * 60}s linear;
       }
     `
   ];
-  OnlHeader = __decorateClass([
-    n5("onl-header")
-  ], OnlHeader);
-
-  // src/utils/reload.ts
-  var reloadWindow = (serviceUrl) => {
-    window.open(serviceUrl, "_top");
-  };
+  __decorateClass([
+    e4({ type: String })
+  ], OnlReloadTimer.prototype, "serviceUrl", 2);
+  __decorateClass([
+    t3()
+  ], OnlReloadTimer.prototype, "timerId", 2);
+  OnlReloadTimer = __decorateClass([
+    n5("onl-reload-timer")
+  ], OnlReloadTimer);
 
   // src/components/onl-tasks.ts
   var OnlTasks = class extends s4 {
@@ -745,9 +756,6 @@
         };
         sensor.start();
       }
-      setInterval(() => {
-        reloadWindow(this.serviceUrl);
-      }, 5 * 60 * 1e3);
     }
     completeTask(tasklistId, taskId) {
       return __async(this, null, function* () {
@@ -769,7 +777,7 @@
     }
     render() {
       return $`
-      <onl-header></onl-header>
+      <onl-reload-timer .serviceUrl=${this.serviceUrl}></onl-reload-timer>
       <pre>${"AmbientLightSensor" in window}</pre>
       <button @click=${() => reloadWindow(this.serviceUrl)}>Reload</button>
       ${this.illuminance != null ? $`
